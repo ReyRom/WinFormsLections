@@ -37,9 +37,14 @@
             RegButton = new Button();
             ShowPasswordCheckBox = new CheckBox();
             label4 = new Label();
-            textBox1 = new TextBox();
+            EmailTextBox = new TextBox();
             label5 = new Label();
             BirthDatePicker = new DateTimePicker();
+            label6 = new Label();
+            FullNameTextBox = new TextBox();
+            ConfirmCheckBox = new CheckBox();
+            MaleRadioButton = new RadioButton();
+            FemaleRadioButton = new RadioButton();
             SuspendLayout();
             // 
             // label1
@@ -75,15 +80,18 @@
             // LoginTextBox
             // 
             LoginTextBox.Location = new Point(13, 34);
-            LoginTextBox.Margin = new Padding(4, 4, 4, 4);
+            LoginTextBox.Margin = new Padding(4);
+            LoginTextBox.MaxLength = 30;
             LoginTextBox.Name = "LoginTextBox";
             LoginTextBox.Size = new Size(454, 29);
             LoginTextBox.TabIndex = 3;
+            LoginTextBox.TextChanged += LoginTextBox_TextChanged;
             // 
             // PasswordTextBox
             // 
             PasswordTextBox.Location = new Point(13, 92);
-            PasswordTextBox.Margin = new Padding(4, 4, 4, 4);
+            PasswordTextBox.Margin = new Padding(4);
+            PasswordTextBox.MaxLength = 30;
             PasswordTextBox.Name = "PasswordTextBox";
             PasswordTextBox.Size = new Size(454, 29);
             PasswordTextBox.TabIndex = 4;
@@ -92,7 +100,8 @@
             // ConfirmTextBox
             // 
             ConfirmTextBox.Location = new Point(13, 150);
-            ConfirmTextBox.Margin = new Padding(4, 4, 4, 4);
+            ConfirmTextBox.Margin = new Padding(4);
+            ConfirmTextBox.MaxLength = 30;
             ConfirmTextBox.Name = "ConfirmTextBox";
             ConfirmTextBox.Size = new Size(454, 29);
             ConfirmTextBox.TabIndex = 5;
@@ -100,13 +109,15 @@
             // 
             // RegButton
             // 
+            RegButton.Enabled = false;
             RegButton.Location = new Point(292, 469);
-            RegButton.Margin = new Padding(4, 4, 4, 4);
+            RegButton.Margin = new Padding(4);
             RegButton.Name = "RegButton";
             RegButton.Size = new Size(189, 32);
             RegButton.TabIndex = 6;
             RegButton.Text = "Зарегистрироваться";
             RegButton.UseVisualStyleBackColor = true;
+            RegButton.Click += RegButton_Click;
             // 
             // ShowPasswordCheckBox
             // 
@@ -122,23 +133,24 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(13, 214);
+            label4.Location = new Point(13, 271);
             label4.Name = "label4";
             label4.Size = new Size(149, 21);
             label4.TabIndex = 8;
             label4.Text = "Электронная почта";
             // 
-            // textBox1
+            // EmailTextBox
             // 
-            textBox1.Location = new Point(13, 238);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(454, 29);
-            textBox1.TabIndex = 9;
+            EmailTextBox.Location = new Point(13, 295);
+            EmailTextBox.MaxLength = 256;
+            EmailTextBox.Name = "EmailTextBox";
+            EmailTextBox.Size = new Size(454, 29);
+            EmailTextBox.TabIndex = 9;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(12, 270);
+            label5.Location = new Point(12, 327);
             label5.Name = "label5";
             label5.Size = new Size(121, 21);
             label5.TabIndex = 10;
@@ -146,19 +158,75 @@
             // 
             // BirthDatePicker
             // 
-            BirthDatePicker.Location = new Point(13, 294);
+            BirthDatePicker.Location = new Point(13, 351);
             BirthDatePicker.Name = "BirthDatePicker";
             BirthDatePicker.Size = new Size(200, 29);
             BirthDatePicker.TabIndex = 11;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(12, 214);
+            label6.Name = "label6";
+            label6.Size = new Size(46, 21);
+            label6.TabIndex = 12;
+            label6.Text = "ФИО";
+            // 
+            // FullNameTextBox
+            // 
+            FullNameTextBox.Location = new Point(13, 238);
+            FullNameTextBox.MaxLength = 300;
+            FullNameTextBox.Name = "FullNameTextBox";
+            FullNameTextBox.Size = new Size(454, 29);
+            FullNameTextBox.TabIndex = 13;
+            FullNameTextBox.KeyPress += FullNameTextBox_KeyPress;
+            // 
+            // ConfirmCheckBox
+            // 
+            ConfirmCheckBox.AutoSize = true;
+            ConfirmCheckBox.Location = new Point(12, 437);
+            ConfirmCheckBox.Name = "ConfirmCheckBox";
+            ConfirmCheckBox.Size = new Size(320, 25);
+            ConfirmCheckBox.TabIndex = 14;
+            ConfirmCheckBox.Text = "Согласиться с условиями использования";
+            ConfirmCheckBox.UseVisualStyleBackColor = true;
+            ConfirmCheckBox.CheckedChanged += ConfirmCheckBox_CheckedChanged;
+            // 
+            // MaleRadioButton
+            // 
+            MaleRadioButton.AutoSize = true;
+            MaleRadioButton.Checked = true;
+            MaleRadioButton.Location = new Point(241, 351);
+            MaleRadioButton.Name = "MaleRadioButton";
+            MaleRadioButton.Size = new Size(42, 25);
+            MaleRadioButton.TabIndex = 15;
+            MaleRadioButton.TabStop = true;
+            MaleRadioButton.Text = "М";
+            MaleRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // FemaleRadioButton
+            // 
+            FemaleRadioButton.AutoSize = true;
+            FemaleRadioButton.Location = new Point(289, 351);
+            FemaleRadioButton.Name = "FemaleRadioButton";
+            FemaleRadioButton.Size = new Size(42, 25);
+            FemaleRadioButton.TabIndex = 16;
+            FemaleRadioButton.Text = "Ж";
+            FemaleRadioButton.UseVisualStyleBackColor = true;
             // 
             // RegistrationForm
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(495, 553);
+            Controls.Add(FemaleRadioButton);
+            Controls.Add(MaleRadioButton);
+            Controls.Add(ConfirmCheckBox);
+            Controls.Add(FullNameTextBox);
+            Controls.Add(label6);
             Controls.Add(BirthDatePicker);
             Controls.Add(label5);
-            Controls.Add(textBox1);
+            Controls.Add(EmailTextBox);
             Controls.Add(label4);
             Controls.Add(ShowPasswordCheckBox);
             Controls.Add(RegButton);
@@ -181,9 +249,14 @@
             Controls.SetChildIndex(RegButton, 0);
             Controls.SetChildIndex(ShowPasswordCheckBox, 0);
             Controls.SetChildIndex(label4, 0);
-            Controls.SetChildIndex(textBox1, 0);
+            Controls.SetChildIndex(EmailTextBox, 0);
             Controls.SetChildIndex(label5, 0);
             Controls.SetChildIndex(BirthDatePicker, 0);
+            Controls.SetChildIndex(label6, 0);
+            Controls.SetChildIndex(FullNameTextBox, 0);
+            Controls.SetChildIndex(ConfirmCheckBox, 0);
+            Controls.SetChildIndex(MaleRadioButton, 0);
+            Controls.SetChildIndex(FemaleRadioButton, 0);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -199,8 +272,13 @@
         private Button RegButton;
         private CheckBox ShowPasswordCheckBox;
         private Label label4;
-        private TextBox textBox1;
+        private TextBox EmailTextBox;
         private Label label5;
         private DateTimePicker BirthDatePicker;
+        private Label label6;
+        private TextBox FullNameTextBox;
+        private CheckBox ConfirmCheckBox;
+        private RadioButton MaleRadioButton;
+        private RadioButton FemaleRadioButton;
     }
 }
