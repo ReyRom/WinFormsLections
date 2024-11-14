@@ -16,7 +16,7 @@ namespace WinFormsApp_31
         public TemplateForm()
         {
             InitializeComponent();
-            _title = this.Text;
+            TimeLabel.Text = $"{DateTime.Now}";
         }
 
         private void TemplateForm_Load(object sender, EventArgs e)
@@ -27,7 +27,7 @@ namespace WinFormsApp_31
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            Text = $"{_title} - {DateTime.Now}";
+            TimeLabel.Text = $"{DateTime.Now}";
         }
 
         public void SetStyle(Control element)

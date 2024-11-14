@@ -41,6 +41,9 @@
             FullNameTextBox = new TextBox();
             BirthDateTimePicker = new DateTimePicker();
             RegButton = new Button();
+            MaleRadioButton = new RadioButton();
+            FemaleRadioButton = new RadioButton();
+            ConfirmCheckBox = new CheckBox();
             SuspendLayout();
             // 
             // label1
@@ -147,18 +150,57 @@
             // RegButton
             // 
             RegButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            RegButton.Location = new Point(176, 501);
+            RegButton.Enabled = false;
+            RegButton.Location = new Point(176, 561);
             RegButton.Name = "RegButton";
             RegButton.Size = new Size(244, 32);
             RegButton.TabIndex = 13;
             RegButton.Text = "Зарегистрироваться";
             RegButton.UseVisualStyleBackColor = true;
+            RegButton.Click += RegButton_Click;
+            // 
+            // MaleRadioButton
+            // 
+            MaleRadioButton.AutoSize = true;
+            MaleRadioButton.Checked = true;
+            MaleRadioButton.Location = new Point(330, 327);
+            MaleRadioButton.Name = "MaleRadioButton";
+            MaleRadioButton.Size = new Size(42, 25);
+            MaleRadioButton.TabIndex = 14;
+            MaleRadioButton.TabStop = true;
+            MaleRadioButton.Text = "М";
+            MaleRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // FemaleRadioButton
+            // 
+            FemaleRadioButton.AutoSize = true;
+            FemaleRadioButton.Location = new Point(378, 327);
+            FemaleRadioButton.Name = "FemaleRadioButton";
+            FemaleRadioButton.Size = new Size(42, 25);
+            FemaleRadioButton.TabIndex = 15;
+            FemaleRadioButton.TabStop = true;
+            FemaleRadioButton.Text = "Ж";
+            FemaleRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // ConfirmCheckBox
+            // 
+            ConfirmCheckBox.AutoSize = true;
+            ConfirmCheckBox.Location = new Point(12, 530);
+            ConfirmCheckBox.Name = "ConfirmCheckBox";
+            ConfirmCheckBox.Size = new Size(217, 25);
+            ConfirmCheckBox.TabIndex = 16;
+            ConfirmCheckBox.Text = "Я прочитал(а) соглашение";
+            ConfirmCheckBox.UseVisualStyleBackColor = true;
+            ConfirmCheckBox.CheckedChanged += ConfirmCheckBox_CheckedChanged;
             // 
             // RegistrationForm
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(432, 593);
+            ClientSize = new Size(432, 653);
+            Controls.Add(ConfirmCheckBox);
+            Controls.Add(FemaleRadioButton);
+            Controls.Add(MaleRadioButton);
             Controls.Add(RegButton);
             Controls.Add(BirthDateTimePicker);
             Controls.Add(FullNameTextBox);
@@ -174,7 +216,7 @@
             Controls.Add(label1);
             Margin = new Padding(5, 6, 5, 6);
             Name = "RegistrationForm";
-            Text = "TemplateForm - 08.11.2024 14:11:21";
+            Text = "Регистрация";
             Controls.SetChildIndex(label1, 0);
             Controls.SetChildIndex(label2, 0);
             Controls.SetChildIndex(label3, 0);
@@ -188,6 +230,9 @@
             Controls.SetChildIndex(FullNameTextBox, 0);
             Controls.SetChildIndex(BirthDateTimePicker, 0);
             Controls.SetChildIndex(RegButton, 0);
+            Controls.SetChildIndex(MaleRadioButton, 0);
+            Controls.SetChildIndex(FemaleRadioButton, 0);
+            Controls.SetChildIndex(ConfirmCheckBox, 0);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -207,5 +252,8 @@
         private TextBox FullNameTextBox;
         private DateTimePicker BirthDateTimePicker;
         private Button RegButton;
+        private RadioButton MaleRadioButton;
+        private RadioButton FemaleRadioButton;
+        private CheckBox ConfirmCheckBox;
     }
 }

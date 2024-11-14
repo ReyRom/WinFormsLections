@@ -2,18 +2,19 @@
 {
     public partial class AuthorizationForm : TemplateForm
     {
-        string _login = "admin";
-        string _password = "qwerty";
+        private UserService _userService;
         public AuthorizationForm()
         {
             InitializeComponent();
+            _userService = UserService.Instance;
             _title = Text;
             SetStyle(this);
         }
 
         private void AuthButton_Click(object sender, EventArgs e)
         {
-            if (LoginTextBox.Text == _login && PasswordTextBox.Text == _password)
+
+            if (_userService.Authorize(LoginTextBox.Text, PasswordTextBox.Text))
             {
                 MessageBox.Show("Добро пожаловать!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }

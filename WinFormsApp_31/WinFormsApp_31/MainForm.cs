@@ -21,5 +21,17 @@ namespace WinFormsApp_31
             RegistrationForm form = new RegistrationForm();
             Navigate(this, form);
         }
+
+        private void ToColorButton_Click(object sender, EventArgs e)
+        {
+            ColorForm form = new ColorForm();
+            Navigate(this, form);
+        }
+
+        private void RolesButton_Click(object sender, EventArgs e)
+        {
+            RoleForm form = new RoleForm();
+            Navigate(this, form);
+        }
     }
 }

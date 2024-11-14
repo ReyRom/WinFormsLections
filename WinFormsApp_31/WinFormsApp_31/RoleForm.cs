@@ -1,0 +1,28 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace WinFormsApp_31
+{
+    public partial class RoleForm : Form
+    {
+        private UserService _userService;
+        public RoleForm()
+        {
+            InitializeComponent();
+            _userService = UserService.Instance;
+        }
+
+        private void RoleForm_Load(object sender, EventArgs e)
+        {
+            UsersListBox.DataSource = _userService.Users;
+            AdminsListBox.DataSource = _userService.Admins;
+        }
+    }
+}
