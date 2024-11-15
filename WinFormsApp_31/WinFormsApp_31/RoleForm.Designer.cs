@@ -43,7 +43,7 @@
             UsersListBox.ItemHeight = 15;
             UsersListBox.Location = new Point(12, 32);
             UsersListBox.Name = "UsersListBox";
-            UsersListBox.Size = new Size(269, 229);
+            UsersListBox.Size = new Size(250, 229);
             UsersListBox.TabIndex = 0;
             UsersListBox.ValueMember = "Login";
             // 
@@ -60,21 +60,23 @@
             // 
             // ToAdminButton
             // 
-            ToAdminButton.Location = new Point(287, 108);
+            ToAdminButton.Location = new Point(278, 108);
             ToAdminButton.Name = "ToAdminButton";
             ToAdminButton.Size = new Size(64, 38);
             ToAdminButton.TabIndex = 2;
             ToAdminButton.Text = "▶";
             ToAdminButton.UseVisualStyleBackColor = true;
+            ToAdminButton.Click += ToAdminButton_Click;
             // 
             // ToUserButton
             // 
-            ToUserButton.Location = new Point(287, 152);
+            ToUserButton.Location = new Point(278, 152);
             ToUserButton.Name = "ToUserButton";
             ToUserButton.Size = new Size(64, 38);
             ToUserButton.TabIndex = 2;
             ToUserButton.Text = "◀";
             ToUserButton.UseVisualStyleBackColor = true;
+            ToUserButton.Click += ToUserButton_Click;
             // 
             // label1
             // 
@@ -106,7 +108,7 @@
             Controls.Add(AdminsListBox);
             Controls.Add(UsersListBox);
             Name = "RoleForm";
-            Text = "RoleForm";
+            Text = "Роли";
             Load += RoleForm_Load;
             ResumeLayout(false);
             PerformLayout();

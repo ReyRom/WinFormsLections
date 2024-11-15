@@ -53,9 +53,9 @@
             // 
             panel1.Controls.Add(TimeLabel);
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 262);
+            panel1.Location = new Point(0, 259);
             panel1.Name = "panel1";
-            panel1.Size = new Size(464, 37);
+            panel1.Size = new Size(464, 40);
             panel1.TabIndex = 2;
             // 
             // TemplateForm

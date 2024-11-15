@@ -10,11 +10,25 @@ using System.Windows.Forms;
 
 namespace WinFormsApp_31
 {
-    public partial class UsersForm : Form
+    public partial class UsersForm : TemplateForm
     {
+        private UserService _userService;
         public UsersForm()
         {
             InitializeComponent();
+            _userService = UserService.Instance;
         }
+
+        private void UsersForm_Load(object sender, EventArgs e)
+        {
+            UsersDataGridView.DataSource = _userService.AllUsers;
+        }
+
+        private void RolesButton_Click(object sender, EventArgs e)
+        {
+            RoleForm form = new RoleForm();
+            Navigate(this, form);
+        }
+
     }
 }

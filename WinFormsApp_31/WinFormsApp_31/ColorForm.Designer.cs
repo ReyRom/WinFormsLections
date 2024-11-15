@@ -38,6 +38,8 @@
             GreenNumericUpDown = new NumericUpDown();
             BlueNumericUpDown = new NumericUpDown();
             ColorComboBox = new ComboBox();
+            SelectColorButton = new Button();
+            SelectColorDialog = new ColorDialog();
             ((System.ComponentModel.ISupportInitialize)RedTrackBar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)GreenTrackBar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)BlueTrackBar).BeginInit();
@@ -131,17 +133,28 @@
             // ColorComboBox
             // 
             ColorComboBox.FormattingEnabled = true;
-            ColorComboBox.Location = new Point(185, 191);
+            ColorComboBox.Location = new Point(21, 191);
             ColorComboBox.Name = "ColorComboBox";
             ColorComboBox.Size = new Size(275, 29);
             ColorComboBox.TabIndex = 9;
             ColorComboBox.SelectedIndexChanged += ColorComboBox_SelectedIndexChanged;
+            // 
+            // SelectColorButton
+            // 
+            SelectColorButton.Location = new Point(320, 189);
+            SelectColorButton.Name = "SelectColorButton";
+            SelectColorButton.Size = new Size(319, 32);
+            SelectColorButton.TabIndex = 10;
+            SelectColorButton.Text = "Выбор";
+            SelectColorButton.UseVisualStyleBackColor = true;
+            SelectColorButton.Click += SelectColorButton_Click;
             // 
             // ColorForm
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(651, 245);
+            Controls.Add(SelectColorButton);
             Controls.Add(ColorComboBox);
             Controls.Add(BlueNumericUpDown);
             Controls.Add(GreenNumericUpDown);
@@ -179,5 +192,7 @@
         private NumericUpDown GreenNumericUpDown;
         private NumericUpDown BlueNumericUpDown;
         private ComboBox ColorComboBox;
+        private Button SelectColorButton;
+        private ColorDialog SelectColorDialog;
     }
 }

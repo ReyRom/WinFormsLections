@@ -39,5 +39,15 @@
             GreenTrackBar.Value = color.G;
             BlueTrackBar.Value = color.B;
         }
+
+        private void SelectColorButton_Click(object sender, EventArgs e)
+        {
+            if(SelectColorDialog.ShowDialog()==DialogResult.OK)
+            {
+                RedTrackBar.Value = SelectColorDialog.Color.R;
+                GreenTrackBar.Value = SelectColorDialog.Color.G;
+                BlueTrackBar.Value = SelectColorDialog.Color.B;
+            }
+        }
     }
 }

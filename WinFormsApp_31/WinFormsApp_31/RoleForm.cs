@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace WinFormsApp_31
+﻿namespace WinFormsApp_31
 {
     public partial class RoleForm : Form
     {
@@ -21,8 +11,30 @@ namespace WinFormsApp_31
 
         private void RoleForm_Load(object sender, EventArgs e)
         {
-            UsersListBox.DataSource = _userService.Users;
-            AdminsListBox.DataSource = _userService.Admins;
+            _userService.Users.ForEach(u => UsersListBox.Items.Add(u));
+            _userService.Admins.ForEach(a => AdminsListBox.Items.Add(a));
+        }
+
+        private void ToAdminButton_Click(object sender, EventArgs e)
+        {
+            var item = UsersListBox.SelectedItem as User;
+            if (item != null)
+            {
+                item.Role = Role.Administrator;
+                UsersListBox.Items.Remove(item);
+                AdminsListBox.Items.Add(item);
+            }
+        }
+
+        private void ToUserButton_Click(object sender, EventArgs e)
+        {
+            var item = AdminsListBox.SelectedItem as User;
+            if (item != null)
+            {
+                item.Role = Role.User;
+                AdminsListBox.Items.Remove(item);
+                UsersListBox.Items.Add(item);
+            }
         }
     }
 }

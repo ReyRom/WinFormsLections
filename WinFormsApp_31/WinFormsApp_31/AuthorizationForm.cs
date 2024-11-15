@@ -13,10 +13,12 @@
 
         private void AuthButton_Click(object sender, EventArgs e)
         {
-
             if (_userService.Authorize(LoginTextBox.Text, PasswordTextBox.Text))
             {
                 MessageBox.Show("Добро пожаловать!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                UsersForm form = new UsersForm();
+                Navigate(this, form);
+                Close();
             }
             else
             {

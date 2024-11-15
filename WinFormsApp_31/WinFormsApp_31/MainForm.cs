@@ -27,11 +27,5 @@ namespace WinFormsApp_31
             ColorForm form = new ColorForm();
             Navigate(this, form);
         }
-
-        private void RolesButton_Click(object sender, EventArgs e)
-        {
-            RoleForm form = new RoleForm();
-            Navigate(this, form);
-        }
     }
 }

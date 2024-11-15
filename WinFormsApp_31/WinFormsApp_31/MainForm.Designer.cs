@@ -31,12 +31,11 @@
             ToAuthorizationButton = new Button();
             ToRegistrationButton = new Button();
             ToColorButton = new Button();
-            RolesButton = new Button();
             SuspendLayout();
             // 
             // ToAuthorizationButton
             // 
-            ToAuthorizationButton.Location = new Point(199, 155);
+            ToAuthorizationButton.Location = new Point(199, 93);
             ToAuthorizationButton.Margin = new Padding(4);
             ToAuthorizationButton.Name = "ToAuthorizationButton";
             ToAuthorizationButton.Size = new Size(159, 41);
@@ -47,7 +46,7 @@
             // 
             // ToRegistrationButton
             // 
-            ToRegistrationButton.Location = new Point(199, 204);
+            ToRegistrationButton.Location = new Point(199, 142);
             ToRegistrationButton.Margin = new Padding(4);
             ToRegistrationButton.Name = "ToRegistrationButton";
             ToRegistrationButton.Size = new Size(159, 39);
@@ -58,7 +57,7 @@
             // 
             // ToColorButton
             // 
-            ToColorButton.Location = new Point(199, 251);
+            ToColorButton.Location = new Point(199, 189);
             ToColorButton.Margin = new Padding(4);
             ToColorButton.Name = "ToColorButton";
             ToColorButton.Size = new Size(159, 39);
@@ -67,23 +66,11 @@
             ToColorButton.UseVisualStyleBackColor = true;
             ToColorButton.Click += ToColorButton_Click;
             // 
-            // RolesButton
-            // 
-            RolesButton.Location = new Point(199, 298);
-            RolesButton.Margin = new Padding(4);
-            RolesButton.Name = "RolesButton";
-            RolesButton.Size = new Size(159, 39);
-            RolesButton.TabIndex = 1;
-            RolesButton.Text = "Роли";
-            RolesButton.UseVisualStyleBackColor = true;
-            RolesButton.Click += RolesButton_Click;
-            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(561, 456);
-            Controls.Add(RolesButton);
             Controls.Add(ToColorButton);
             Controls.Add(ToRegistrationButton);
             Controls.Add(ToAuthorizationButton);
@@ -93,7 +80,6 @@
             Controls.SetChildIndex(ToAuthorizationButton, 0);
             Controls.SetChildIndex(ToRegistrationButton, 0);
             Controls.SetChildIndex(ToColorButton, 0);
-            Controls.SetChildIndex(RolesButton, 0);
             ResumeLayout(false);
         }
 
@@ -102,6 +88,5 @@
         private Button ToAuthorizationButton;
         private Button ToRegistrationButton;
         private Button ToColorButton;
-        private Button RolesButton;
     }
 }

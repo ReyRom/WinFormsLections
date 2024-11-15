@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WinFormsApp_31
+﻿namespace WinFormsApp_31
 {
     public class UserService
     {
@@ -27,6 +21,15 @@ namespace WinFormsApp_31
                 Email = "user@user.com",
                 FullName = "Юзер Юзерович",
                 Role = Role.User,
+            },
+            new User(){
+                Login = "reyrom",
+                Password = "reyrom",
+                BirthDate = new DateTime(2000,1,1),
+                Gender = Gender.Male,
+                Email = "reyrom@reyrom.com",
+                FullName = "Роман Садовский",
+                Role = Role.User,
             }
         ];
 
@@ -40,7 +43,8 @@ namespace WinFormsApp_31
             return _users.FirstOrDefault(user => user.Login == login && user.Password == password) != null;
         }
 
-        public List<User> Users { get { return _users.Where(x=>x.Role == Role.User).ToList(); } }
-        public List<User> Admins { get { return _users.Where(x => x.Role == Role.Administrator).ToList(); } }
+        public List<User> Users { get => _users.Where(x => x.Role == Role.User).ToList(); }
+        public List<User> Admins { get => _users.Where(x => x.Role == Role.Administrator).ToList(); }
+        public List<User> AllUsers { get => _users; }
     }
 }
