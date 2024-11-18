@@ -239,7 +239,6 @@
             Margin = new Padding(5, 6, 5, 6);
             Name = "RegistrationForm";
             Text = "Регистрация";
-            Load += RegistrationForm_Load;
             Controls.SetChildIndex(label1, 0);
             Controls.SetChildIndex(label2, 0);
             Controls.SetChildIndex(label3, 0);

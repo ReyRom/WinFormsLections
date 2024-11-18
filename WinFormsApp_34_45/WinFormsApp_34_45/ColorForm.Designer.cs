@@ -37,6 +37,9 @@
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
+            ColorComboBox = new ComboBox();
+            SelectColorDialog = new ColorDialog();
+            SelectColorButton = new Button();
             ((System.ComponentModel.ISupportInitialize)RedTrackBar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)GreenTrackBar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)BlueTrackBar).BeginInit();
@@ -53,7 +56,7 @@
             RedTrackBar.Name = "RedTrackBar";
             RedTrackBar.Size = new Size(523, 45);
             RedTrackBar.TabIndex = 0;
-            RedTrackBar.Scroll += Color_Changed;
+            RedTrackBar.ValueChanged += Color_Changed;
             // 
             // GreenTrackBar
             // 
@@ -63,7 +66,7 @@
             GreenTrackBar.Name = "GreenTrackBar";
             GreenTrackBar.Size = new Size(523, 45);
             GreenTrackBar.TabIndex = 0;
-            GreenTrackBar.Scroll += Color_Changed;
+            GreenTrackBar.ValueChanged += Color_Changed;
             // 
             // BlueTrackBar
             // 
@@ -73,7 +76,7 @@
             BlueTrackBar.Name = "BlueTrackBar";
             BlueTrackBar.Size = new Size(523, 45);
             BlueTrackBar.TabIndex = 0;
-            BlueTrackBar.Scroll += Color_Changed;
+            BlueTrackBar.ValueChanged += Color_Changed;
             // 
             // RedNumericUpDown
             // 
@@ -135,11 +138,32 @@
             label3.TabIndex = 2;
             label3.Text = "B";
             // 
+            // ColorComboBox
+            // 
+            ColorComboBox.FormattingEnabled = true;
+            ColorComboBox.Location = new Point(15, 227);
+            ColorComboBox.Name = "ColorComboBox";
+            ColorComboBox.Size = new Size(299, 29);
+            ColorComboBox.TabIndex = 3;
+            ColorComboBox.SelectedIndexChanged += ColorComboBox_SelectedIndexChanged;
+            // 
+            // SelectColorButton
+            // 
+            SelectColorButton.Location = new Point(418, 229);
+            SelectColorButton.Name = "SelectColorButton";
+            SelectColorButton.Size = new Size(268, 27);
+            SelectColorButton.TabIndex = 4;
+            SelectColorButton.Text = "Выбрать";
+            SelectColorButton.UseVisualStyleBackColor = true;
+            SelectColorButton.Click += SelectColorButton_Click;
+            // 
             // ColorForm
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(721, 232);
+            ClientSize = new Size(721, 288);
+            Controls.Add(SelectColorButton);
+            Controls.Add(ColorComboBox);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -153,6 +177,7 @@
             Margin = new Padding(4);
             Name = "ColorForm";
             Text = "ColorForm";
+            Load += ColorForm_Load;
             ((System.ComponentModel.ISupportInitialize)RedTrackBar).EndInit();
             ((System.ComponentModel.ISupportInitialize)GreenTrackBar).EndInit();
             ((System.ComponentModel.ISupportInitialize)BlueTrackBar).EndInit();
@@ -174,5 +199,8 @@
         private Label label1;
         private Label label2;
         private Label label3;
+        private ComboBox ColorComboBox;
+        private ColorDialog SelectColorDialog;
+        private Button SelectColorButton;
     }
 }

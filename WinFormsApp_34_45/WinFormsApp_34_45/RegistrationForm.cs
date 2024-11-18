@@ -12,9 +12,13 @@ namespace WinFormsApp_34_45
 {
     public partial class RegistrationForm : TemplateForm
     {
+        private UserService _userService;
         public RegistrationForm()
         {
             InitializeComponent();
+
+            _userService = UserService.Instance;
+
             BirthDatePicker.MaxDate = DateTime.Today;
         }
 
@@ -23,12 +27,6 @@ namespace WinFormsApp_34_45
             PasswordTextBox.UseSystemPasswordChar
                 = ConfirmTextBox.UseSystemPasswordChar
                 = !ShowPasswordCheckBox.Checked;
-
-        }
-
-        private void RegistrationForm_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void FullNameTextBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -64,6 +62,7 @@ namespace WinFormsApp_34_45
             user.BirthDate = BirthDatePicker.Value;
             user.Gender = MaleRadioButton.Checked ? Gender.Male : Gender.Female;
 
+            _userService.Registrate(user);
         }
     }
 }

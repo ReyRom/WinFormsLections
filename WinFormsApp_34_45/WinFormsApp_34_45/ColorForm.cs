@@ -34,5 +34,31 @@ namespace WinFormsApp_34_45
 
             this.BackColor = Color.FromArgb(RedTrackBar.Value, GreenTrackBar.Value, BlueTrackBar.Value);
         }
+
+        private void ColorForm_Load(object sender, EventArgs e)
+        {
+            ColorComboBox.DataSource = typeof(Color).GetProperties()
+                .Where(x => x.PropertyType == typeof(Color))
+                .Select(x => x.GetValue(null)).ToList();
+        }
+
+        private void ColorComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var color = (Color)ColorComboBox.SelectedItem != Color.Transparent ? (Color)ColorComboBox.SelectedItem : Color.White;
+
+            RedTrackBar.Value = color.R;
+            GreenTrackBar.Value = color.G;
+            BlueTrackBar.Value = color.B;
+        }
+
+        private void SelectColorButton_Click(object sender, EventArgs e)
+        {
+            if(SelectColorDialog.ShowDialog() == DialogResult.OK)
+            {
+                RedTrackBar.Value = SelectColorDialog.Color.R;
+                GreenTrackBar.Value = SelectColorDialog.Color.G;
+                BlueTrackBar.Value = SelectColorDialog.Color.B;
+            }
+        }
     }
 }

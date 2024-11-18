@@ -14,6 +14,7 @@ namespace WinFormsApp_34_45
         public DateTime BirthDate { get; set; }
         public string FullName { get; set; }
         public Gender Gender { get; set; }
+        public List<String> Hobby { get; set; } = new List<String>();
     }
 
     public enum Gender
