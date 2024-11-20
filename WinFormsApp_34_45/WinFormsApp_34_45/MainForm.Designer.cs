@@ -32,6 +32,7 @@ namespace WinFormsApp_34_45
             ToAuthorizationButton = new Button();
             ToRegistrationButton = new Button();
             ToColorsButton = new Button();
+            button1 = new Button();
             SuspendLayout();
             // 
             // ToAuthorizationButton
@@ -67,12 +68,24 @@ namespace WinFormsApp_34_45
             ToColorsButton.UseVisualStyleBackColor = true;
             ToColorsButton.Click += ToColorsButton_Click;
             // 
+            // button1
+            // 
+            button1.Location = new Point(239, 116);
+            button1.Margin = new Padding(4);
+            button1.Name = "button1";
+            button1.Size = new Size(131, 32);
+            button1.TabIndex = 0;
+            button1.Text = "Users";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(579, 406);
             Controls.Add(ToColorsButton);
+            Controls.Add(button1);
             Controls.Add(ToRegistrationButton);
             Controls.Add(ToAuthorizationButton);
             Margin = new Padding(5, 6, 5, 6);
@@ -80,6 +93,7 @@ namespace WinFormsApp_34_45
             Text = "Моя крутая программа";
             Controls.SetChildIndex(ToAuthorizationButton, 0);
             Controls.SetChildIndex(ToRegistrationButton, 0);
+            Controls.SetChildIndex(button1, 0);
             Controls.SetChildIndex(ToColorsButton, 0);
             ResumeLayout(false);
         }
@@ -89,5 +103,6 @@ namespace WinFormsApp_34_45
         private Button ToAuthorizationButton;
         private Button ToRegistrationButton;
         private Button ToColorsButton;
+        private Button button1;
     }
 }

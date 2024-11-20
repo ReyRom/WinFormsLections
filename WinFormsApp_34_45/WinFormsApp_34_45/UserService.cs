@@ -13,6 +13,24 @@
                 FullName="Админ Админович",
                 BirthDate=new DateTime(2000,1,1), 
                 Gender=Gender.Male 
+            },
+            new User
+            {
+                Login="user",
+                Password="qwerty",
+                Email="user@mail.ru",
+                FullName="Юзер Юзерович",
+                BirthDate=new DateTime(2000,1,1),
+                Gender=Gender.Male
+            },
+            new User
+            {
+                Login="fuser",
+                Password="asd123",
+                Email="fuser@mail.ru",
+                FullName="Юзерка Юзеровна",
+                BirthDate=new DateTime(2000,1,1),
+                Gender=Gender.Female
             }
         ];
 

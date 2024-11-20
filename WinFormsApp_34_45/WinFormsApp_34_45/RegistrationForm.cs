@@ -61,8 +61,10 @@ namespace WinFormsApp_34_45
             user.Email = EmailTextBox.Text;
             user.BirthDate = BirthDatePicker.Value;
             user.Gender = MaleRadioButton.Checked ? Gender.Male : Gender.Female;
+            user.FullName = FullNameTextBox.Text;
 
             _userService.Registrate(user);
+            MessageBox.Show("Вы зарегистрированы");
         }
     }
 }

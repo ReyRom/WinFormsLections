@@ -1,6 +1,6 @@
 ﻿namespace WinFormsApp_34_45
 {
-    public partial class UserInfoForm : Form
+    public partial class UserInfoForm : TemplateForm
     {
         private User _user;
         public UserInfoForm(User user)

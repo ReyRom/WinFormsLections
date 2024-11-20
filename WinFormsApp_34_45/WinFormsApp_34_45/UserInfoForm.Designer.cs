@@ -59,21 +59,21 @@
             // 
             HobbyListBox.FormattingEnabled = true;
             HobbyListBox.ItemHeight = 21;
-            HobbyListBox.Location = new Point(15, 202);
+            HobbyListBox.Location = new Point(15, 173);
             HobbyListBox.Name = "HobbyListBox";
             HobbyListBox.Size = new Size(490, 151);
             HobbyListBox.TabIndex = 2;
             // 
             // HobbyTextBox
             // 
-            HobbyTextBox.Location = new Point(15, 167);
+            HobbyTextBox.Location = new Point(15, 138);
             HobbyTextBox.Name = "HobbyTextBox";
             HobbyTextBox.Size = new Size(357, 29);
             HobbyTextBox.TabIndex = 3;
             // 
             // AddHobbyButton
             // 
-            AddHobbyButton.Location = new Point(378, 167);
+            AddHobbyButton.Location = new Point(378, 138);
             AddHobbyButton.Name = "AddHobbyButton";
             AddHobbyButton.Size = new Size(127, 29);
             AddHobbyButton.TabIndex = 4;
@@ -91,11 +91,14 @@
             Controls.Add(HobbyListBox);
             Controls.Add(AgeLabel);
             Controls.Add(NameLabel);
-            Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            Margin = new Padding(4);
             Name = "UserInfoForm";
-            Text = "UserInfoForm";
+            Text = "Пользователь";
             Load += UserInfoForm_Load;
+            Controls.SetChildIndex(NameLabel, 0);
+            Controls.SetChildIndex(AgeLabel, 0);
+            Controls.SetChildIndex(HobbyListBox, 0);
+            Controls.SetChildIndex(HobbyTextBox, 0);
+            Controls.SetChildIndex(AddHobbyButton, 0);
             ResumeLayout(false);
             PerformLayout();
         }

@@ -26,5 +26,11 @@ namespace WinFormsApp_34_45
             ColorForm form = new ColorForm();
             Navigate(this, form);
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            UserListForm form = new UserListForm();
+            Navigate(this, form);
+        }
     }
 }
