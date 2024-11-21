@@ -1,4 +1,6 @@
-﻿namespace WinFormsApp_31
+﻿using System.Collections.ObjectModel;
+
+namespace WinFormsApp_31
 {
     public class UserService
     {
@@ -45,6 +47,6 @@
 
         public List<User> Users { get => _users.Where(x => x.Role == Role.User).ToList(); }
         public List<User> Admins { get => _users.Where(x => x.Role == Role.Administrator).ToList(); }
-        public List<User> AllUsers { get => _users; }
+        public List<User> AllUsers { get => _users; set => _users = value; }
     }
 }

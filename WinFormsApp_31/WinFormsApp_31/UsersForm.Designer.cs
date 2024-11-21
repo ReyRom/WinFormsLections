@@ -30,8 +30,6 @@
         {
             components = new System.ComponentModel.Container();
             UsersDataGridView = new DataGridView();
-            userBindingSource = new BindingSource(components);
-            RolesButton = new Button();
             loginDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             passwordDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             emailDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -40,6 +38,12 @@
             genderDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             roleDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             DeleteColumn = new DataGridViewButtonColumn();
+            userBindingSource = new BindingSource(components);
+            RolesButton = new Button();
+            SaveUsersButton = new Button();
+            LoadUsersButton = new Button();
+            UsersOpenFileDialog = new OpenFileDialog();
+            UsersSaveFileDialog = new SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)UsersDataGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)userBindingSource).BeginInit();
             SuspendLayout();
@@ -57,21 +61,8 @@
             UsersDataGridView.ReadOnly = true;
             UsersDataGridView.Size = new Size(744, 330);
             UsersDataGridView.TabIndex = 0;
-            // 
-            // userBindingSource
-            // 
-            userBindingSource.DataSource = typeof(User);
-            // 
-            // RolesButton
-            // 
-            RolesButton.Location = new Point(15, 15);
-            RolesButton.Margin = new Padding(5, 6, 5, 6);
-            RolesButton.Name = "RolesButton";
-            RolesButton.Size = new Size(204, 38);
-            RolesButton.TabIndex = 2;
-            RolesButton.Text = "Роли";
-            RolesButton.UseVisualStyleBackColor = true;
-            RolesButton.Click += RolesButton_Click;
+            UsersDataGridView.CellClick += UsersDataGridView_CellClick;
+            UsersDataGridView.DataError += UsersDataGridView_DataError;
             // 
             // loginDataGridViewTextBoxColumn
             // 
@@ -133,11 +124,57 @@
             DeleteColumn.Resizable = DataGridViewTriState.True;
             DeleteColumn.SortMode = DataGridViewColumnSortMode.Automatic;
             // 
+            // userBindingSource
+            // 
+            userBindingSource.DataSource = typeof(User);
+            // 
+            // RolesButton
+            // 
+            RolesButton.Location = new Point(15, 15);
+            RolesButton.Margin = new Padding(5, 6, 5, 6);
+            RolesButton.Name = "RolesButton";
+            RolesButton.Size = new Size(204, 38);
+            RolesButton.TabIndex = 2;
+            RolesButton.Text = "Роли";
+            RolesButton.UseVisualStyleBackColor = true;
+            RolesButton.Click += RolesButton_Click;
+            // 
+            // SaveUsersButton
+            // 
+            SaveUsersButton.Location = new Point(411, 15);
+            SaveUsersButton.Name = "SaveUsersButton";
+            SaveUsersButton.Size = new Size(166, 38);
+            SaveUsersButton.TabIndex = 3;
+            SaveUsersButton.Text = "Сохранить";
+            SaveUsersButton.UseVisualStyleBackColor = true;
+            SaveUsersButton.Click += SaveUsersButton_Click;
+            // 
+            // LoadUsersButton
+            // 
+            LoadUsersButton.Location = new Point(583, 15);
+            LoadUsersButton.Name = "LoadUsersButton";
+            LoadUsersButton.Size = new Size(176, 38);
+            LoadUsersButton.TabIndex = 4;
+            LoadUsersButton.Text = "Загрузить";
+            LoadUsersButton.UseVisualStyleBackColor = true;
+            LoadUsersButton.Click += LoadUsersButton_Click;
+            // 
+            // UsersOpenFileDialog
+            // 
+            UsersOpenFileDialog.Filter = "JSON|*.json";
+            // 
+            // UsersSaveFileDialog
+            // 
+            UsersSaveFileDialog.FileName = "users.json";
+            UsersSaveFileDialog.Filter = "JSON|*.json";
+            // 
             // UsersForm
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(787, 474);
+            Controls.Add(LoadUsersButton);
+            Controls.Add(SaveUsersButton);
             Controls.Add(RolesButton);
             Controls.Add(UsersDataGridView);
             Margin = new Padding(5, 6, 5, 6);
@@ -146,6 +183,8 @@
             Load += UsersForm_Load;
             Controls.SetChildIndex(UsersDataGridView, 0);
             Controls.SetChildIndex(RolesButton, 0);
+            Controls.SetChildIndex(SaveUsersButton, 0);
+            Controls.SetChildIndex(LoadUsersButton, 0);
             ((System.ComponentModel.ISupportInitialize)UsersDataGridView).EndInit();
             ((System.ComponentModel.ISupportInitialize)userBindingSource).EndInit();
             ResumeLayout(false);
@@ -164,5 +203,9 @@
         private DataGridViewTextBoxColumn genderDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn roleDataGridViewTextBoxColumn;
         private DataGridViewButtonColumn DeleteColumn;
+        private Button SaveUsersButton;
+        private Button LoadUsersButton;
+        private OpenFileDialog UsersOpenFileDialog;
+        private SaveFileDialog UsersSaveFileDialog;
     }
 }
