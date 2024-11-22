@@ -2,6 +2,36 @@ namespace WinFormsApp_34_45
 {
     public partial class MainForm : TemplateForm
     {
+        private AuthorizationForm _authorizationForm;
+        public AuthorizationForm AuthorizationForm
+        {
+            get
+            {
+                bool isNull = _authorizationForm == null || _authorizationForm.IsDisposed;
+                return isNull ? _authorizationForm = new AuthorizationForm() { MdiParent = this } : _authorizationForm;
+            }
+        }
+
+        private RegistrationForm _registrationForm;
+        public RegistrationForm RegistrationForm
+        {
+            get
+            {
+                bool isNull = _registrationForm == null || _registrationForm.IsDisposed;
+                return isNull ? _registrationForm = new RegistrationForm() { MdiParent = this } : _registrationForm;
+            }
+        }
+
+        private ColorForm _colorForm;
+        public ColorForm ColorForm
+        {
+            get
+            {
+                bool isNull = _colorForm == null || _colorForm.IsDisposed;
+                return isNull ? _colorForm = new ColorForm() { MdiParent = this } : _colorForm;
+            }
+        }
+
         public MainForm()
         {
             InitializeComponent();
@@ -9,28 +39,33 @@ namespace WinFormsApp_34_45
 
         private void ToAuthorizationButton_Click(object sender, EventArgs e)
         {
-            AuthorizationForm form = new AuthorizationForm();
-            Navigate(this, form);
+            AuthorizationForm.Show();
         }
-
-
 
         private void ToRegistrationButton_Click(object sender, EventArgs e)
         {
-            RegistrationForm form = new RegistrationForm();
-            Navigate(this, form);
+            RegistrationForm.Show();
         }
 
         private void ToColorsButton_Click(object sender, EventArgs e)
         {
-            ColorForm form = new ColorForm();
-            Navigate(this, form);
+            ColorForm.Show();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void MainForm_Load(object sender, EventArgs e)
         {
-            UserListForm form = new UserListForm();
-            Navigate(this, form);
+            TimeStatusLabel.Text = $"{DateTime.Now}";
+            MainTimer.Start();
+        }
+
+        private void MainTimer_Tick(object sender, EventArgs e)
+        {
+            TimeStatusLabel.Text = $"{DateTime.Now}";
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            MainTimer.Stop();
         }
     }
 }

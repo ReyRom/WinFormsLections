@@ -4,6 +4,8 @@
     {
         public static UserService Instance { get; } = new UserService();
 
+        private UserService() { }
+
         public List<User> Users { get; set; } = [
             new User
             {

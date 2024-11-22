@@ -55,7 +55,6 @@ namespace WinFormsApp_34_45
         private void RegButton_Click(object sender, EventArgs e)
         {
             User user = new User();
-
             user.Login = LoginTextBox.Text;
             user.Password = PasswordTextBox.Text;
             user.Email = EmailTextBox.Text;

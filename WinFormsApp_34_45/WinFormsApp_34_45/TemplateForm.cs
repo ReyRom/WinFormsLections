@@ -12,25 +12,27 @@ namespace WinFormsApp_34_45
 {
     public partial class TemplateForm : Form
     {
+        private Settings _settings;
         public TemplateForm()
         {
             InitializeComponent();
+            _settings = Settings.Instance;
+
+            _settings.ColorChanged += Settings_ColorChanged;
+        }
+
+        private void Settings_ColorChanged(object? sender, EventArgs e)
+        {
+            BackColor = _settings.Color;
         }
 
         private void TemplateForm_Load(object sender, EventArgs e)
         {
-            TimeLabel.Text = DateTime.Now.ToString();
-            DateTimeTimer.Start();
-        }
-
-        private void DateTimeTimer_Tick(object sender, EventArgs e)
-        {
-            TimeLabel.Text = DateTime.Now.ToString();
+            BackColor = _settings.Color;
         }
 
         private void TemplateForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            DateTimeTimer.Stop();
         }
         protected void Navigate(Form fromForm, Form toForm)
         {

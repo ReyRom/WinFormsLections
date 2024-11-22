@@ -29,80 +29,99 @@ namespace WinFormsApp_34_45
         /// </summary>
         private void InitializeComponent()
         {
-            ToAuthorizationButton = new Button();
-            ToRegistrationButton = new Button();
-            ToColorsButton = new Button();
-            button1 = new Button();
+            components = new System.ComponentModel.Container();
+            MainMenuStrip = new MenuStrip();
+            RegistrateMenuItem = new ToolStripMenuItem();
+            AuthorizationMenuItem = new ToolStripMenuItem();
+            ColorMenuItem = new ToolStripMenuItem();
+            MainStatusStrip = new StatusStrip();
+            TimeStatusLabel = new ToolStripStatusLabel();
+            MainTimer = new System.Windows.Forms.Timer(components);
+            MainMenuStrip.SuspendLayout();
+            MainStatusStrip.SuspendLayout();
             SuspendLayout();
             // 
-            // ToAuthorizationButton
+            // MainMenuStrip
             // 
-            ToAuthorizationButton.Location = new Point(121, 182);
-            ToAuthorizationButton.Margin = new Padding(4);
-            ToAuthorizationButton.Name = "ToAuthorizationButton";
-            ToAuthorizationButton.Size = new Size(131, 32);
-            ToAuthorizationButton.TabIndex = 0;
-            ToAuthorizationButton.Text = "Авторизация";
-            ToAuthorizationButton.UseVisualStyleBackColor = true;
-            ToAuthorizationButton.Click += ToAuthorizationButton_Click;
+            MainMenuStrip.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            MainMenuStrip.Items.AddRange(new ToolStripItem[] { RegistrateMenuItem, AuthorizationMenuItem, ColorMenuItem });
+            MainMenuStrip.Location = new Point(0, 0);
+            MainMenuStrip.Name = "MainMenuStrip";
+            MainMenuStrip.Size = new Size(919, 29);
+            MainMenuStrip.TabIndex = 1;
+            MainMenuStrip.Text = "menuStrip1";
             // 
-            // ToRegistrationButton
+            // RegistrateMenuItem
             // 
-            ToRegistrationButton.Location = new Point(350, 182);
-            ToRegistrationButton.Margin = new Padding(4);
-            ToRegistrationButton.Name = "ToRegistrationButton";
-            ToRegistrationButton.Size = new Size(131, 32);
-            ToRegistrationButton.TabIndex = 0;
-            ToRegistrationButton.Text = "Регистрация";
-            ToRegistrationButton.UseVisualStyleBackColor = true;
-            ToRegistrationButton.Click += ToRegistrationButton_Click;
+            RegistrateMenuItem.Name = "RegistrateMenuItem";
+            RegistrateMenuItem.Size = new Size(112, 25);
+            RegistrateMenuItem.Text = "Регистрация";
+            RegistrateMenuItem.Click += ToRegistrationButton_Click;
             // 
-            // ToColorsButton
+            // AuthorizationMenuItem
             // 
-            ToColorsButton.Location = new Point(239, 242);
-            ToColorsButton.Margin = new Padding(4);
-            ToColorsButton.Name = "ToColorsButton";
-            ToColorsButton.Size = new Size(131, 32);
-            ToColorsButton.TabIndex = 0;
-            ToColorsButton.Text = "Colors";
-            ToColorsButton.UseVisualStyleBackColor = true;
-            ToColorsButton.Click += ToColorsButton_Click;
+            AuthorizationMenuItem.Name = "AuthorizationMenuItem";
+            AuthorizationMenuItem.Size = new Size(65, 25);
+            AuthorizationMenuItem.Text = "Войти";
+            AuthorizationMenuItem.Click += ToAuthorizationButton_Click;
             // 
-            // button1
+            // ColorMenuItem
             // 
-            button1.Location = new Point(239, 116);
-            button1.Margin = new Padding(4);
-            button1.Name = "button1";
-            button1.Size = new Size(131, 32);
-            button1.TabIndex = 0;
-            button1.Text = "Users";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            ColorMenuItem.Name = "ColorMenuItem";
+            ColorMenuItem.Size = new Size(57, 25);
+            ColorMenuItem.Text = "Цвет";
+            ColorMenuItem.Click += ToColorsButton_Click;
+            // 
+            // MainStatusStrip
+            // 
+            MainStatusStrip.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            MainStatusStrip.Items.AddRange(new ToolStripItem[] { TimeStatusLabel });
+            MainStatusStrip.Location = new Point(0, 483);
+            MainStatusStrip.Name = "MainStatusStrip";
+            MainStatusStrip.Size = new Size(919, 26);
+            MainStatusStrip.TabIndex = 2;
+            MainStatusStrip.Text = "statusStrip1";
+            // 
+            // TimeStatusLabel
+            // 
+            TimeStatusLabel.Name = "TimeStatusLabel";
+            TimeStatusLabel.Size = new Size(105, 21);
+            TimeStatusLabel.Text = "Дата и время";
+            // 
+            // MainTimer
+            // 
+            MainTimer.Interval = 1000;
+            MainTimer.Tick += MainTimer_Tick;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(579, 406);
-            Controls.Add(ToColorsButton);
-            Controls.Add(button1);
-            Controls.Add(ToRegistrationButton);
-            Controls.Add(ToAuthorizationButton);
+            ClientSize = new Size(919, 509);
+            Controls.Add(MainStatusStrip);
+            Controls.Add(MainMenuStrip);
+            IsMdiContainer = true;
             Margin = new Padding(5, 6, 5, 6);
             Name = "MainForm";
             Text = "Моя крутая программа";
-            Controls.SetChildIndex(ToAuthorizationButton, 0);
-            Controls.SetChildIndex(ToRegistrationButton, 0);
-            Controls.SetChildIndex(button1, 0);
-            Controls.SetChildIndex(ToColorsButton, 0);
+            FormClosed += MainForm_FormClosed;
+            Load += MainForm_Load;
+            MainMenuStrip.ResumeLayout(false);
+            MainMenuStrip.PerformLayout();
+            MainStatusStrip.ResumeLayout(false);
+            MainStatusStrip.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
-        private Button ToAuthorizationButton;
-        private Button ToRegistrationButton;
-        private Button ToColorsButton;
-        private Button button1;
+        private MenuStrip MainMenuStrip;
+        private StatusStrip MainStatusStrip;
+        private System.Windows.Forms.Timer MainTimer;
+        private ToolStripMenuItem RegistrateMenuItem;
+        private ToolStripMenuItem AuthorizationMenuItem;
+        private ToolStripMenuItem ColorMenuItem;
+        private ToolStripStatusLabel TimeStatusLabel;
     }
 }

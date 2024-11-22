@@ -28,38 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            FooterPanel = new Panel();
-            TimeLabel = new Label();
-            DateTimeTimer = new System.Windows.Forms.Timer(components);
-            FooterPanel.SuspendLayout();
             SuspendLayout();
-            // 
-            // FooterPanel
-            // 
-            FooterPanel.Controls.Add(TimeLabel);
-            FooterPanel.Dock = DockStyle.Bottom;
-            FooterPanel.Location = new Point(0, 387);
-            FooterPanel.Margin = new Padding(4);
-            FooterPanel.Name = "FooterPanel";
-            FooterPanel.Size = new Size(551, 30);
-            FooterPanel.TabIndex = 0;
-            // 
-            // TimeLabel
-            // 
-            TimeLabel.Dock = DockStyle.Left;
-            TimeLabel.Location = new Point(0, 0);
-            TimeLabel.Margin = new Padding(4, 0, 4, 0);
-            TimeLabel.Name = "TimeLabel";
-            TimeLabel.Size = new Size(222, 30);
-            TimeLabel.TabIndex = 0;
-            TimeLabel.Text = "label1";
-            TimeLabel.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // DateTimeTimer
-            // 
-            DateTimeTimer.Interval = 1000;
-            DateTimeTimer.Tick += DateTimeTimer_Tick;
             // 
             // TemplateForm
             // 
@@ -67,7 +36,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightCyan;
             ClientSize = new Size(551, 417);
-            Controls.Add(FooterPanel);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
             Margin = new Padding(4);
             Name = "TemplateForm";
@@ -75,14 +43,9 @@
             Text = "TemplateForm";
             FormClosed += TemplateForm_FormClosed;
             Load += TemplateForm_Load;
-            FooterPanel.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
-
-        private Panel FooterPanel;
-        private Label TimeLabel;
-        private System.Windows.Forms.Timer DateTimeTimer;
     }
 }

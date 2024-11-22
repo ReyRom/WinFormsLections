@@ -12,9 +12,11 @@ namespace WinFormsApp_34_45
 {
     public partial class ColorForm : Form
     {
+        private Settings _settings;
         public ColorForm()
         {
             InitializeComponent();
+            _settings = Settings.Instance;
         }
 
         private void Color_Changed(object sender, EventArgs e)
@@ -53,12 +55,17 @@ namespace WinFormsApp_34_45
 
         private void SelectColorButton_Click(object sender, EventArgs e)
         {
-            if(SelectColorDialog.ShowDialog() == DialogResult.OK)
+            if (SelectColorDialog.ShowDialog() == DialogResult.OK)
             {
                 RedTrackBar.Value = SelectColorDialog.Color.R;
                 GreenTrackBar.Value = SelectColorDialog.Color.G;
                 BlueTrackBar.Value = SelectColorDialog.Color.B;
             }
+        }
+
+        private void AcceptButton_Click(object sender, EventArgs e)
+        {
+            _settings.Color = BackColor;
         }
     }
 }
