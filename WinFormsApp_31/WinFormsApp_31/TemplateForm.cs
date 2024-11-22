@@ -13,21 +13,22 @@ namespace WinFormsApp_31
     public partial class TemplateForm : Form
     {
         protected string _title;
+        private Settings _settings;
         public TemplateForm()
         {
             InitializeComponent();
-            TimeLabel.Text = $"{DateTime.Now}";
+            _settings = Settings.Instance;
+            _settings.ColorChanged += Settings_ColorChanged;
+        }
+
+        private void Settings_ColorChanged(object? sender, EventArgs e)
+        {
+            BackColor = _settings.Color;
         }
 
         private void TemplateForm_Load(object sender, EventArgs e)
         {
-            timer.Interval = 1000;
-            timer.Start();
-        }
-
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            TimeLabel.Text = $"{DateTime.Now}";
+            BackColor = _settings.Color;
         }
 
         public void SetStyle(Control element)

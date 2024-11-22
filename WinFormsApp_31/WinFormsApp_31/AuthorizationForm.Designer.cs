@@ -111,12 +111,6 @@
             Controls.Add(label1);
             Name = "AuthorizationForm";
             Text = "Авторизация";
-            Controls.SetChildIndex(label1, 0);
-            Controls.SetChildIndex(label2, 0);
-            Controls.SetChildIndex(LoginTextBox, 0);
-            Controls.SetChildIndex(PasswordTextBox, 0);
-            Controls.SetChildIndex(AuthButton, 0);
-            Controls.SetChildIndex(ShowPasswordCheckBox, 0);
             ResumeLayout(false);
             PerformLayout();
         }

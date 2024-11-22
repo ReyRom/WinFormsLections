@@ -40,6 +40,7 @@
             ColorComboBox = new ComboBox();
             SelectColorButton = new Button();
             SelectColorDialog = new ColorDialog();
+            AcceptButton = new Button();
             ((System.ComponentModel.ISupportInitialize)RedTrackBar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)GreenTrackBar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)BlueTrackBar).BeginInit();
@@ -149,11 +150,23 @@
             SelectColorButton.UseVisualStyleBackColor = true;
             SelectColorButton.Click += SelectColorButton_Click;
             // 
+            // AcceptButton
+            // 
+            AcceptButton.Location = new Point(210, 238);
+            AcceptButton.Name = "AcceptButton";
+            AcceptButton.Size = new Size(195, 38);
+            AcceptButton.TabIndex = 11;
+            AcceptButton.Text = "Применить";
+            AcceptButton.UseVisualStyleBackColor = true;
+            AcceptButton.Click += AcceptButton_Click;
+            // 
             // ColorForm
             // 
+            AcceptButton = AcceptButton;
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(651, 245);
+            ClientSize = new Size(651, 288);
+            Controls.Add(AcceptButton);
             Controls.Add(SelectColorButton);
             Controls.Add(ColorComboBox);
             Controls.Add(BlueNumericUpDown);
@@ -194,5 +207,6 @@
         private ComboBox ColorComboBox;
         private Button SelectColorButton;
         private ColorDialog SelectColorDialog;
+        private Button AcceptButton;
     }
 }

@@ -32,7 +32,7 @@
             {
                 PasswordTextBox.UseSystemPasswordChar = false;
             }
-            else 
+            else
             {
                 PasswordTextBox.UseSystemPasswordChar = true;
             }
