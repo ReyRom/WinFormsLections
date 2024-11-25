@@ -31,6 +31,15 @@ namespace WinFormsApp_34_45
                 return isNull ? _colorForm = new ColorForm() { MdiParent = this } : _colorForm;
             }
         }
+        private UserListForm _usersForm;
+        public UserListForm UsersForm
+        {
+            get
+            {
+                bool isNull = _usersForm == null || _usersForm.IsDisposed;
+                return isNull ? _usersForm = new UserListForm() { MdiParent = this } : _usersForm;
+            }
+        }
 
         public MainForm()
         {
@@ -66,6 +75,11 @@ namespace WinFormsApp_34_45
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             MainTimer.Stop();
+        }
+
+        private void UserListMenuItem_Click(object sender, EventArgs e)
+        {
+            UsersForm.Show();
         }
     }
 }

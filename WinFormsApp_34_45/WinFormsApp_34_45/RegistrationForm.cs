@@ -65,5 +65,10 @@ namespace WinFormsApp_34_45
             _userService.Registrate(user);
             MessageBox.Show("Вы зарегистрированы");
         }
+
+        private void RenewButton_Click(object sender, EventArgs e)
+        {
+            RegistrationCaptcha.Renew();
+        }
     }
 }

@@ -34,6 +34,7 @@ namespace WinFormsApp_34_45
             RegistrateMenuItem = new ToolStripMenuItem();
             AuthorizationMenuItem = new ToolStripMenuItem();
             ColorMenuItem = new ToolStripMenuItem();
+            UserListMenuItem = new ToolStripMenuItem();
             MainStatusStrip = new StatusStrip();
             TimeStatusLabel = new ToolStripStatusLabel();
             MainTimer = new System.Windows.Forms.Timer(components);
@@ -44,7 +45,7 @@ namespace WinFormsApp_34_45
             // MainMenuStrip
             // 
             MainMenuStrip.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            MainMenuStrip.Items.AddRange(new ToolStripItem[] { RegistrateMenuItem, AuthorizationMenuItem, ColorMenuItem });
+            MainMenuStrip.Items.AddRange(new ToolStripItem[] { RegistrateMenuItem, AuthorizationMenuItem, ColorMenuItem, UserListMenuItem });
             MainMenuStrip.Location = new Point(0, 0);
             MainMenuStrip.Name = "MainMenuStrip";
             MainMenuStrip.Size = new Size(919, 29);
@@ -71,6 +72,13 @@ namespace WinFormsApp_34_45
             ColorMenuItem.Size = new Size(57, 25);
             ColorMenuItem.Text = "Цвет";
             ColorMenuItem.Click += ToColorsButton_Click;
+            // 
+            // UserListMenuItem
+            // 
+            UserListMenuItem.Name = "UserListMenuItem";
+            UserListMenuItem.Size = new Size(122, 25);
+            UserListMenuItem.Text = "Пользователи";
+            UserListMenuItem.Click += UserListMenuItem_Click;
             // 
             // MainStatusStrip
             // 
@@ -123,5 +131,6 @@ namespace WinFormsApp_34_45
         private ToolStripMenuItem AuthorizationMenuItem;
         private ToolStripMenuItem ColorMenuItem;
         private ToolStripStatusLabel TimeStatusLabel;
+        private ToolStripMenuItem UserListMenuItem;
     }
 }

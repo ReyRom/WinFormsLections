@@ -51,12 +51,23 @@ namespace WinFormsApp_34_45
         {
             if (UsersOpenFileDialog.ShowDialog() == DialogResult.OK)
             {
-                var data = File.ReadAllText(UsersOpenFileDialog.FileName);
-                var users = JsonSerializer.Deserialize<List<User>>(data);
-                _userService.Users = users ?? new List<User>();
+                try
+                {
+                    var data = File.ReadAllText(UsersOpenFileDialog.FileName);
+                    var users = JsonSerializer.Deserialize<List<User>>(data);
+                    _userService.Users = users ?? new List<User>();
 
-                MessageBox.Show("Данные загружены");
-                UsersDataGridView.DataSource = _userService.Users;
+                    MessageBox.Show("Данные загружены");
+                    UsersDataGridView.DataSource = _userService.Users;
+                }
+                catch (JsonException ex)
+                {
+                    MessageBox.Show("Ошибка JSON", "Ошибка");
+                }
+                catch (Exception ex) 
+                {
+                    MessageBox.Show(ex.Message,"Ошибка");
+                }
             }
         }
     }

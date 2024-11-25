@@ -45,6 +45,8 @@
             ConfirmCheckBox = new CheckBox();
             MaleRadioButton = new RadioButton();
             FemaleRadioButton = new RadioButton();
+            RegistrationCaptcha = new Captcha();
+            RenewButton = new Button();
             SuspendLayout();
             // 
             // label1
@@ -110,7 +112,7 @@
             // RegButton
             // 
             RegButton.Enabled = false;
-            RegButton.Location = new Point(292, 469);
+            RegButton.Location = new Point(293, 599);
             RegButton.Margin = new Padding(4);
             RegButton.Name = "RegButton";
             RegButton.Size = new Size(189, 32);
@@ -184,7 +186,7 @@
             // ConfirmCheckBox
             // 
             ConfirmCheckBox.AutoSize = true;
-            ConfirmCheckBox.Location = new Point(12, 437);
+            ConfirmCheckBox.Location = new Point(12, 567);
             ConfirmCheckBox.Name = "ConfirmCheckBox";
             ConfirmCheckBox.Size = new Size(320, 25);
             ConfirmCheckBox.TabIndex = 14;
@@ -214,11 +216,31 @@
             FemaleRadioButton.Text = "Ж";
             FemaleRadioButton.UseVisualStyleBackColor = true;
             // 
+            // RegistrationCaptcha
+            // 
+            RegistrationCaptcha.BackColor = SystemColors.ControlLightLight;
+            RegistrationCaptcha.Location = new Point(13, 418);
+            RegistrationCaptcha.Name = "RegistrationCaptcha";
+            RegistrationCaptcha.Size = new Size(300, 100);
+            RegistrationCaptcha.TabIndex = 17;
+            // 
+            // RenewButton
+            // 
+            RenewButton.Location = new Point(347, 450);
+            RenewButton.Name = "RenewButton";
+            RenewButton.Size = new Size(108, 33);
+            RenewButton.TabIndex = 18;
+            RenewButton.Text = "Обновить";
+            RenewButton.UseVisualStyleBackColor = true;
+            RenewButton.Click += RenewButton_Click;
+            // 
             // RegistrationForm
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(495, 553);
+            ClientSize = new Size(495, 644);
+            Controls.Add(RenewButton);
+            Controls.Add(RegistrationCaptcha);
             Controls.Add(FemaleRadioButton);
             Controls.Add(MaleRadioButton);
             Controls.Add(ConfirmCheckBox);
@@ -239,23 +261,6 @@
             Margin = new Padding(5, 6, 5, 6);
             Name = "RegistrationForm";
             Text = "Регистрация";
-            Controls.SetChildIndex(label1, 0);
-            Controls.SetChildIndex(label2, 0);
-            Controls.SetChildIndex(label3, 0);
-            Controls.SetChildIndex(LoginTextBox, 0);
-            Controls.SetChildIndex(PasswordTextBox, 0);
-            Controls.SetChildIndex(ConfirmTextBox, 0);
-            Controls.SetChildIndex(RegButton, 0);
-            Controls.SetChildIndex(ShowPasswordCheckBox, 0);
-            Controls.SetChildIndex(label4, 0);
-            Controls.SetChildIndex(EmailTextBox, 0);
-            Controls.SetChildIndex(label5, 0);
-            Controls.SetChildIndex(BirthDatePicker, 0);
-            Controls.SetChildIndex(label6, 0);
-            Controls.SetChildIndex(FullNameTextBox, 0);
-            Controls.SetChildIndex(ConfirmCheckBox, 0);
-            Controls.SetChildIndex(MaleRadioButton, 0);
-            Controls.SetChildIndex(FemaleRadioButton, 0);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -279,5 +284,7 @@
         private CheckBox ConfirmCheckBox;
         private RadioButton MaleRadioButton;
         private RadioButton FemaleRadioButton;
+        private Captcha RegistrationCaptcha;
+        private Button RenewButton;
     }
 }
