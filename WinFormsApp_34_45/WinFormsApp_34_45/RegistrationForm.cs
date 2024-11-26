@@ -70,5 +70,17 @@ namespace WinFormsApp_34_45
         {
             RegistrationCaptcha.Renew();
         }
+
+        private void ValidateButton_Click(object sender, EventArgs e)
+        {
+            if (RegistrationCaptcha.IsValidCaptcha(CaptchaTextBox.Text))
+            {
+                MessageBox.Show("Вы не робот");
+            }
+            else
+            {
+                MessageBox.Show("Вы робот");
+            }
+        }
     }
 }

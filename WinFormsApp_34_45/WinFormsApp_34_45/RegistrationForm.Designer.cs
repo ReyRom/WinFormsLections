@@ -47,6 +47,8 @@
             FemaleRadioButton = new RadioButton();
             RegistrationCaptcha = new Captcha();
             RenewButton = new Button();
+            CaptchaTextBox = new TextBox();
+            ValidateButton = new Button();
             SuspendLayout();
             // 
             // label1
@@ -218,15 +220,20 @@
             // 
             // RegistrationCaptcha
             // 
-            RegistrationCaptcha.BackColor = SystemColors.ControlLightLight;
-            RegistrationCaptcha.Location = new Point(13, 418);
+            RegistrationCaptcha.BackColor = Color.FromArgb(128, 255, 128);
+            RegistrationCaptcha.Font = new Font("Consolas", 30F);
+            RegistrationCaptcha.Length = 6;
+            RegistrationCaptcha.LinesColor = Color.Red;
+            RegistrationCaptcha.Location = new Point(13, 403);
             RegistrationCaptcha.Name = "RegistrationCaptcha";
+            RegistrationCaptcha.PointsColor = Color.Lime;
             RegistrationCaptcha.Size = new Size(300, 100);
             RegistrationCaptcha.TabIndex = 17;
+            RegistrationCaptcha.TextColor = Color.Green;
             // 
             // RenewButton
             // 
-            RenewButton.Location = new Point(347, 450);
+            RenewButton.Location = new Point(343, 439);
             RenewButton.Name = "RenewButton";
             RenewButton.Size = new Size(108, 33);
             RenewButton.TabIndex = 18;
@@ -234,11 +241,30 @@
             RenewButton.UseVisualStyleBackColor = true;
             RenewButton.Click += RenewButton_Click;
             // 
+            // CaptchaTextBox
+            // 
+            CaptchaTextBox.Location = new Point(12, 519);
+            CaptchaTextBox.Name = "CaptchaTextBox";
+            CaptchaTextBox.Size = new Size(301, 29);
+            CaptchaTextBox.TabIndex = 19;
+            // 
+            // ValidateButton
+            // 
+            ValidateButton.Location = new Point(343, 519);
+            ValidateButton.Name = "ValidateButton";
+            ValidateButton.Size = new Size(108, 29);
+            ValidateButton.TabIndex = 20;
+            ValidateButton.Text = "Проверка";
+            ValidateButton.UseVisualStyleBackColor = true;
+            ValidateButton.Click += ValidateButton_Click;
+            // 
             // RegistrationForm
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(495, 644);
+            Controls.Add(ValidateButton);
+            Controls.Add(CaptchaTextBox);
             Controls.Add(RenewButton);
             Controls.Add(RegistrationCaptcha);
             Controls.Add(FemaleRadioButton);
@@ -286,5 +312,7 @@
         private RadioButton FemaleRadioButton;
         private Captcha RegistrationCaptcha;
         private Button RenewButton;
+        private TextBox CaptchaTextBox;
+        private Button ValidateButton;
     }
 }
