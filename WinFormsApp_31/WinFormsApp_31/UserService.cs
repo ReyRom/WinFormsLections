@@ -2,9 +2,13 @@
 
 namespace WinFormsApp_31
 {
-    public class UserService
+    public sealed class UserService
     {
-        public static UserService Instance { get; set; } = new UserService();
+        private UserService() { }
+        private static UserService? _instance;
+        public static UserService Instance { get => _instance ??= new UserService(); }
+
+
         private List<User> _users = [
             new User() {
                 Login = "admin",

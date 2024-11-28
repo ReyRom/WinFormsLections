@@ -69,6 +69,10 @@ namespace WinFormsApp_31
                 builder.AppendLine("Указан некорректный email");
             }
 
+            if (!RegistrationCaptcha.IsCorrectText(CaptchaTextBox.Text))
+            {
+                builder.AppendLine("Некорректное значение капчи");
+            }
 
             if (builder.Length > 0)
             {
@@ -99,18 +103,6 @@ namespace WinFormsApp_31
         private void RegistrationForm_Load(object sender, EventArgs e)
         {
             RegistrationCaptcha.Renew();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (RegistrationCaptcha.IsCorrectText(CaptchaTextBox.Text))
-            {
-                MessageBox.Show("Ты кожаный мешок");
-            }
-            else
-            {
-                MessageBox.Show("Приветствую, брат");
-            }
         }
     }
 }
