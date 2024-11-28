@@ -34,8 +34,10 @@
             // 
             // CaptchaPictureBox
             // 
+            CaptchaPictureBox.BackColor = Color.FromArgb(128, 128, 255);
             CaptchaPictureBox.Dock = DockStyle.Fill;
             CaptchaPictureBox.Location = new Point(0, 0);
+            CaptchaPictureBox.Margin = new Padding(9);
             CaptchaPictureBox.Name = "CaptchaPictureBox";
             CaptchaPictureBox.Size = new Size(300, 100);
             CaptchaPictureBox.TabIndex = 0;
@@ -43,9 +45,12 @@
             // 
             // Captcha
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(22F, 47F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(CaptchaPictureBox);
+            Font = new Font("Consolas", 30F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            ForeColor = Color.FromArgb(0, 192, 0);
+            Margin = new Padding(9);
             Name = "Captcha";
             Size = new Size(300, 100);
             ((System.ComponentModel.ISupportInitialize)CaptchaPictureBox).EndInit();

@@ -197,9 +197,15 @@
             // 
             // RegistrationCaptcha
             // 
+            RegistrationCaptcha.BackColor = Color.FromArgb(128, 128, 255);
             RegistrationCaptcha.BorderStyle = BorderStyle.FixedSingle;
+            RegistrationCaptcha.DotsColor = Color.Blue;
+            RegistrationCaptcha.Font = new Font("Consolas", 30F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            RegistrationCaptcha.ForeColor = Color.FromArgb(0, 192, 0);
             RegistrationCaptcha.Length = 5;
+            RegistrationCaptcha.LinesColor = Color.Blue;
             RegistrationCaptcha.Location = new Point(13, 390);
+            RegistrationCaptcha.Margin = new Padding(9);
             RegistrationCaptcha.Name = "RegistrationCaptcha";
             RegistrationCaptcha.Size = new Size(300, 100);
             RegistrationCaptcha.TabIndex = 17;

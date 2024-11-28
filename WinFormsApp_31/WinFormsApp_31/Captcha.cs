@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Drawing.Drawing2D;
 
 namespace WinFormsApp_31
 {
@@ -14,6 +6,10 @@ namespace WinFormsApp_31
     {
         private string _text;
         public int Length { get; set; } = 5;
+        public Color LinesColor { get; set; } = Color.Blue;
+
+        public Color DotsColor { get; set; } = Color.Blue;
+
         public Captcha()
         {
             InitializeComponent();
@@ -32,18 +28,18 @@ namespace WinFormsApp_31
 
             using (Graphics g = Graphics.FromImage(result))
             {
-                g.Clear(Color.BlueViolet);
+                g.Clear(BackColor);
 
                 #region Lines
                 const int lines = 10;
 
-                using (Pen linesPen = new Pen(Color.Blue))
+                using (Pen linesPen = new Pen(LinesColor))
                 {
                     for (int i = 0; i < lines; i++)
                     {
                         g.DrawLine(linesPen,
                                    new PointF(0, 0),
-                                   new PointF(rnd.Next(width),height));
+                                   new PointF(rnd.Next(width), height));
                     }
                     for (int i = 0; i < lines; i++)
                     {
@@ -75,11 +71,48 @@ namespace WinFormsApp_31
                     _text += ALF[rnd.Next(ALF.Length)];
                 }
 
-                using (Brush textBrush = new SolidBrush(Color.Green))
-                {
+                int space = width / Length;
 
+                float textWidth;
+                float textHeight;
+
+                using (Bitmap temp = new Bitmap(400, 400))
+                {
+                    using (Graphics tg = Graphics.FromImage(temp))
+                    {
+                        var size = tg.MeasureString("W", Font);
+                        textWidth = size.Width;
+                        textHeight = size.Height;
+                    }
+                }
+
+                for (int i = 0; i < Length; i++)
+                {
+                    int xPos = rnd.Next(i * space, (i + 1) * space - (int)textWidth);
+                    int yPos = rnd.Next(0, height - (int)textHeight);
+                    float angle = rnd.Next(-45, 45);
+                    using (Matrix matrix = new Matrix())
+                    {
+                        matrix.RotateAt(angle, new PointF(xPos + textWidth / 2, yPos + textHeight / 2));
+                        g.Transform = matrix;
+                    }
+                    using (Brush textBrush = new SolidBrush(ForeColor))
+                    {
+                        g.DrawString(_text.Substring(i, 1), Font, textBrush, xPos, yPos);
+                    }
+                    g.ResetTransform();
                 }
             }
+
+            for (int i = 0; i < width; i++)
+            {
+                for (int j = 0; j < height; j++)
+                {
+                    if (rnd.Next() % 10 == 0)
+                        result.SetPixel(i, j, DotsColor);
+                }
+            }
+
             return result;
         }
     }
