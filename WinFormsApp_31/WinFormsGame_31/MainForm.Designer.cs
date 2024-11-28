@@ -31,12 +31,12 @@
             components = new System.ComponentModel.Container();
             MainMenuStrip = new MenuStrip();
             NewGameMenuItem = new ToolStripMenuItem();
-            HeroPictureBox = new PictureBox();
             GameCycleTimer = new System.Windows.Forms.Timer(components);
             FieldPanel = new Panel();
+            HeroPictureBox = new PictureBox();
             MainMenuStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)HeroPictureBox).BeginInit();
             FieldPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)HeroPictureBox).BeginInit();
             SuspendLayout();
             // 
             // MainMenuStrip
@@ -54,15 +54,6 @@
             NewGameMenuItem.Size = new Size(81, 20);
             NewGameMenuItem.Text = "Новая игра";
             // 
-            // HeroPictureBox
-            // 
-            HeroPictureBox.BackColor = Color.Blue;
-            HeroPictureBox.Location = new Point(221, 386);
-            HeroPictureBox.Name = "HeroPictureBox";
-            HeroPictureBox.Size = new Size(50, 58);
-            HeroPictureBox.TabIndex = 1;
-            HeroPictureBox.TabStop = false;
-            // 
             // GameCycleTimer
             // 
             GameCycleTimer.Interval = 40;
@@ -78,6 +69,15 @@
             FieldPanel.Size = new Size(471, 479);
             FieldPanel.TabIndex = 2;
             // 
+            // HeroPictureBox
+            // 
+            HeroPictureBox.BackColor = Color.Blue;
+            HeroPictureBox.Location = new Point(221, 386);
+            HeroPictureBox.Name = "HeroPictureBox";
+            HeroPictureBox.Size = new Size(50, 58);
+            HeroPictureBox.TabIndex = 1;
+            HeroPictureBox.TabStop = false;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -92,8 +92,8 @@
             KeyUp += MainForm_KeyUp;
             MainMenuStrip.ResumeLayout(false);
             MainMenuStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)HeroPictureBox).EndInit();
             FieldPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)HeroPictureBox).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -102,8 +102,8 @@
 
         private MenuStrip MainMenuStrip;
         private ToolStripMenuItem NewGameMenuItem;
-        private PictureBox HeroPictureBox;
         private System.Windows.Forms.Timer GameCycleTimer;
         private Panel FieldPanel;
+        private PictureBox HeroPictureBox;
     }
 }

@@ -33,9 +33,8 @@ namespace WinFormsGame_31
             }
             if (e.KeyCode == Keys.Space)
             {
-                var proj = new Projectile() { Rectangle = new Rectangle(HeroPictureBox.Location.X, HeroPictureBox.Location.Y, 5, 2) };
-                FieldPanel.Controls.Add(proj.Rectangle);
-                _movementList.Add(proj);
+                //var proj = new Projectile() { Rectangle = new Rectangle(HeroPictureBox.Location.X, HeroPictureBox.Location.Y, 5, 2) };
+                //_movementList.Add(proj);
             }
         }
 
@@ -99,24 +98,43 @@ namespace WinFormsGame_31
     public interface IMovement
     {
         void Move();
-        double SpeedX { get; set; }
-        double SpeedY { get; set; }
+        Vector Speed { get; set; }
         Point Position { get; set; }
     }
+
+    public class GameObject : Panel
+    {
+
+    }
+
+    public struct Vector
+    {
+        public float X; 
+        public float Y;
+
+        public Vector(float x, float y)
+        {
+            X = x;
+            Y = y;
+        }
+
+        public static Vector operator +(Vector v1, Vector v2)
+        {
+            return new Vector(v1.X+v2.X, v1.Y+v2.Y);
+        }
+        public static Vector operator *(Vector v, float n)
+        {
+            return new Vector(v.X*n, v.Y*n);
+        }
+    }
+
     public class Hero
     {
 
     }
-    public class Projectile : IMovement
-    {
-        public Rectangle Rectangle { get; set; }
-        public double SpeedX { get; set; } = 25;
-        public double SpeedY { get; set; } = 0;
-        public Point Position { get; set; }
 
-        public void Move()
-        {
-            Position = new Point(Position.X + (int)SpeedX, Position.Y);
-        }
+    public class Projectile 
+    {
+        
     }
 }
