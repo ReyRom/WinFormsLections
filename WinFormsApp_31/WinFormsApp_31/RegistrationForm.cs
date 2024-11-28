@@ -70,7 +70,7 @@ namespace WinFormsApp_31
             }
 
 
-            if(builder.Length > 0)
+            if (builder.Length > 0)
             {
                 MessageBox.Show(builder.ToString(), "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -89,6 +89,16 @@ namespace WinFormsApp_31
             _userService.Registrate(user);
 
             MessageBox.Show($"{user.Login}, Вы зарегистрированы");
+        }
+
+        private void RenewButton_Click(object sender, EventArgs e)
+        {
+            RegistrationCaptcha.Renew();
+        }
+
+        private void RegistrationForm_Load(object sender, EventArgs e)
+        {
+            RegistrationCaptcha.Renew();
         }
     }
 }
