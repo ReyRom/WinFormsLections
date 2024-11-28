@@ -15,6 +15,11 @@ namespace WinFormsApp_31
             InitializeComponent();
         }
 
+        public bool IsCorrectText(string text)
+        {
+            return _text == text;
+        }
+
         public void Renew()
         {
             CaptchaPictureBox.Image?.Dispose();

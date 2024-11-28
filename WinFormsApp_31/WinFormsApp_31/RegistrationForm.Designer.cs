@@ -46,6 +46,8 @@
             ConfirmCheckBox = new CheckBox();
             RegistrationCaptcha = new Captcha();
             RenewButton = new Button();
+            CaptchaTextBox = new TextBox();
+            button1 = new Button();
             SuspendLayout();
             // 
             // label1
@@ -153,7 +155,7 @@
             // 
             RegButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             RegButton.Enabled = false;
-            RegButton.Location = new Point(176, 561);
+            RegButton.Location = new Point(176, 573);
             RegButton.Name = "RegButton";
             RegButton.Size = new Size(244, 32);
             RegButton.TabIndex = 13;
@@ -204,7 +206,7 @@
             RegistrationCaptcha.ForeColor = Color.FromArgb(0, 192, 0);
             RegistrationCaptcha.Length = 5;
             RegistrationCaptcha.LinesColor = Color.Blue;
-            RegistrationCaptcha.Location = new Point(13, 390);
+            RegistrationCaptcha.Location = new Point(12, 359);
             RegistrationCaptcha.Margin = new Padding(9);
             RegistrationCaptcha.Name = "RegistrationCaptcha";
             RegistrationCaptcha.Size = new Size(300, 100);
@@ -212,7 +214,7 @@
             // 
             // RenewButton
             // 
-            RenewButton.Location = new Point(330, 430);
+            RenewButton.Location = new Point(330, 397);
             RenewButton.Name = "RenewButton";
             RenewButton.Size = new Size(90, 29);
             RenewButton.TabIndex = 18;
@@ -220,11 +222,30 @@
             RenewButton.UseVisualStyleBackColor = true;
             RenewButton.Click += RenewButton_Click;
             // 
+            // CaptchaTextBox
+            // 
+            CaptchaTextBox.Location = new Point(12, 471);
+            CaptchaTextBox.Name = "CaptchaTextBox";
+            CaptchaTextBox.Size = new Size(300, 29);
+            CaptchaTextBox.TabIndex = 19;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(330, 471);
+            button1.Name = "button1";
+            button1.Size = new Size(90, 29);
+            button1.TabIndex = 20;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // RegistrationForm
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(432, 653);
+            ClientSize = new Size(432, 617);
+            Controls.Add(button1);
+            Controls.Add(CaptchaTextBox);
             Controls.Add(RenewButton);
             Controls.Add(RegistrationCaptcha);
             Controls.Add(ConfirmCheckBox);
@@ -271,5 +292,7 @@
         private CheckBox ConfirmCheckBox;
         private Captcha RegistrationCaptcha;
         private Button RenewButton;
+        private TextBox CaptchaTextBox;
+        private Button button1;
     }
 }

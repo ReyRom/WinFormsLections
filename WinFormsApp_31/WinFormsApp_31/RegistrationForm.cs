@@ -100,5 +100,17 @@ namespace WinFormsApp_31
         {
             RegistrationCaptcha.Renew();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (RegistrationCaptcha.IsCorrectText(CaptchaTextBox.Text))
+            {
+                MessageBox.Show("Ты кожаный мешок");
+            }
+            else
+            {
+                MessageBox.Show("Приветствую, брат");
+            }
+        }
     }
 }
