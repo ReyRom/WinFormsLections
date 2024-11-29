@@ -34,13 +34,14 @@
             GameCycleTimer = new System.Windows.Forms.Timer(components);
             FieldPanel = new Panel();
             _hero = new Hero();
+            ScoreMenuItem = new ToolStripMenuItem();
             MainMenuStrip.SuspendLayout();
             FieldPanel.SuspendLayout();
             SuspendLayout();
             // 
             // MainMenuStrip
             // 
-            MainMenuStrip.Items.AddRange(new ToolStripItem[] { NewGameMenuItem });
+            MainMenuStrip.Items.AddRange(new ToolStripItem[] { NewGameMenuItem, ScoreMenuItem });
             MainMenuStrip.Location = new Point(0, 0);
             MainMenuStrip.Name = "MainMenuStrip";
             MainMenuStrip.Size = new Size(471, 24);
@@ -71,10 +72,16 @@
             // _hero
             // 
             _hero.BackColor = Color.Blue;
-            _hero.Location = new Point(208, 200);
+            _hero.Location = new Point(63, 209);
             _hero.Name = "_hero";
             _hero.Size = new Size(43, 54);
             _hero.TabIndex = 2;
+            // 
+            // ScoreMenuItem
+            // 
+            ScoreMenuItem.Name = "ScoreMenuItem";
+            ScoreMenuItem.Size = new Size(54, 20);
+            ScoreMenuItem.Text = "Score: ";
             // 
             // MainForm
             // 
@@ -102,5 +109,6 @@
         private System.Windows.Forms.Timer GameCycleTimer;
         private Panel FieldPanel;
         private Hero _hero;
+        private ToolStripMenuItem ScoreMenuItem;
     }
 }
