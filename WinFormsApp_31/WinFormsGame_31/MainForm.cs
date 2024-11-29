@@ -3,7 +3,8 @@ namespace WinFormsGame_31
     public partial class MainForm : Form
     {
         private const float MOVESPEED = 5;
-        private int _score;
+        private int _score = 0;
+        private int _counter = 0;
         private Enemy _enemy = new Enemy()
         {
             Location = new Point(400, Random.Shared.Next(200, 300))
@@ -54,27 +55,47 @@ namespace WinFormsGame_31
         private void GameCycleTimer_Tick(object sender, EventArgs e)
         {
             DrawHero();
-            foreach(var item in _movementList)
+            foreach (var item in _movementList)
             {
                 item.MoveObject();
             }
 
-            _enemy.Speed = new Vector(0, Random.Shared.Next(-10,10));
+            
+                
+            _counter++;
+            if (_counter > 7 )
+            {
+                var speed = new Vector(0, Random.Shared.Next(-10, 10));
+
+                _enemy.Speed = speed;
+
+                _counter = 0;
+            }
             _enemy.MoveObject();
 
-            foreach(Projectile item in _movementList)
+            if (_enemy.TopBound - _enemy.Speed.Y < 0)
+            {
+                _enemy.Location = new Point(_enemy.Location.X, 0);
+            }
+
+            if (_enemy.BottomBound + _enemy.Speed.Y > FieldPanel.Height - _enemy.Height)
+            {
+                _enemy.Location = new Point(_enemy.Location.X, FieldPanel.Height - _enemy.Height);
+            }
+
+            foreach (Projectile item in _movementList)
             {
                 if (item.IsCollide(_enemy))
                 {
                     _enemy.Dispose();
-                    _enemy = new Enemy() { Location = new Point(400,Random.Shared.Next(200, 300)) };
+                    _enemy = new Enemy() { Location = new Point(400, Random.Shared.Next(200, 300)) };
                     IncreaseScore();
                     FieldPanel.Controls.Add(_enemy);
                 }
             }
 
             var removeList = _movementList.Where(x => x.Location.X > Width).ToList();
-            
+
             foreach (var item in removeList)
             {
                 _movementList.Remove(item);
@@ -197,7 +218,7 @@ namespace WinFormsGame_31
     {
         public Enemy()
         {
-            Size = new Size(25,25);
+            Size = new Size(25, 25);
             BackColor = Color.Red;
         }
 
@@ -213,7 +234,7 @@ namespace WinFormsGame_31
     {
         public Projectile()
         {
-            Size = new Size(5,5);
+            Size = new Size(5, 5);
             BackColor = Color.Red;
         }
 
@@ -222,7 +243,7 @@ namespace WinFormsGame_31
             return Bounds.IntersectsWith(go.Bounds);
         }
 
-        public Vector Speed { get; set; } = new Vector (25, 0);
+        public Vector Speed { get; set; } = new Vector(25, 0);
 
         public void MoveObject()
         {
