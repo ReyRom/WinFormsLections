@@ -33,10 +33,9 @@
             NewGameMenuItem = new ToolStripMenuItem();
             GameCycleTimer = new System.Windows.Forms.Timer(components);
             FieldPanel = new Panel();
-            HeroPictureBox = new PictureBox();
+            _hero = new Hero();
             MainMenuStrip.SuspendLayout();
             FieldPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)HeroPictureBox).BeginInit();
             SuspendLayout();
             // 
             // MainMenuStrip
@@ -61,7 +60,7 @@
             // 
             // FieldPanel
             // 
-            FieldPanel.Controls.Add(HeroPictureBox);
+            FieldPanel.Controls.Add(_hero);
             FieldPanel.Dock = DockStyle.Fill;
             FieldPanel.ForeColor = SystemColors.ActiveCaptionText;
             FieldPanel.Location = new Point(0, 24);
@@ -69,14 +68,13 @@
             FieldPanel.Size = new Size(471, 479);
             FieldPanel.TabIndex = 2;
             // 
-            // HeroPictureBox
+            // _hero
             // 
-            HeroPictureBox.BackColor = Color.Blue;
-            HeroPictureBox.Location = new Point(221, 386);
-            HeroPictureBox.Name = "HeroPictureBox";
-            HeroPictureBox.Size = new Size(50, 58);
-            HeroPictureBox.TabIndex = 1;
-            HeroPictureBox.TabStop = false;
+            _hero.BackColor = Color.Blue;
+            _hero.Location = new Point(208, 200);
+            _hero.Name = "_hero";
+            _hero.Size = new Size(43, 54);
+            _hero.TabIndex = 2;
             // 
             // MainForm
             // 
@@ -93,7 +91,6 @@
             MainMenuStrip.ResumeLayout(false);
             MainMenuStrip.PerformLayout();
             FieldPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)HeroPictureBox).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -104,6 +101,6 @@
         private ToolStripMenuItem NewGameMenuItem;
         private System.Windows.Forms.Timer GameCycleTimer;
         private Panel FieldPanel;
-        private PictureBox HeroPictureBox;
+        private Hero _hero;
     }
 }
