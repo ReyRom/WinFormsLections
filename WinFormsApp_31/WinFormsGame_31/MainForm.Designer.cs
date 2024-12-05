@@ -31,17 +31,18 @@
             components = new System.ComponentModel.Container();
             MainMenuStrip = new MenuStrip();
             NewGameMenuItem = new ToolStripMenuItem();
+            ScoreMenuItem = new ToolStripMenuItem();
+            HealthPointsMenuItem = new ToolStripMenuItem();
             GameCycleTimer = new System.Windows.Forms.Timer(components);
             FieldPanel = new Panel();
             _hero = new Hero();
-            ScoreMenuItem = new ToolStripMenuItem();
             MainMenuStrip.SuspendLayout();
             FieldPanel.SuspendLayout();
             SuspendLayout();
             // 
             // MainMenuStrip
             // 
-            MainMenuStrip.Items.AddRange(new ToolStripItem[] { NewGameMenuItem, ScoreMenuItem });
+            MainMenuStrip.Items.AddRange(new ToolStripItem[] { NewGameMenuItem, ScoreMenuItem, HealthPointsMenuItem });
             MainMenuStrip.Location = new Point(0, 0);
             MainMenuStrip.Name = "MainMenuStrip";
             MainMenuStrip.Size = new Size(471, 24);
@@ -53,6 +54,19 @@
             NewGameMenuItem.Name = "NewGameMenuItem";
             NewGameMenuItem.Size = new Size(81, 20);
             NewGameMenuItem.Text = "Новая игра";
+            NewGameMenuItem.Click += NewGameMenuItem_Click;
+            // 
+            // ScoreMenuItem
+            // 
+            ScoreMenuItem.Name = "ScoreMenuItem";
+            ScoreMenuItem.Size = new Size(54, 20);
+            ScoreMenuItem.Text = "Score: ";
+            // 
+            // HealthPointsMenuItem
+            // 
+            HealthPointsMenuItem.Name = "HealthPointsMenuItem";
+            HealthPointsMenuItem.Size = new Size(87, 20);
+            HealthPointsMenuItem.Text = "HealthPoints";
             // 
             // GameCycleTimer
             // 
@@ -72,16 +86,11 @@
             // _hero
             // 
             _hero.BackColor = Color.Blue;
+            _hero.HealthPoint = 3;
             _hero.Location = new Point(63, 209);
             _hero.Name = "_hero";
             _hero.Size = new Size(43, 54);
             _hero.TabIndex = 2;
-            // 
-            // ScoreMenuItem
-            // 
-            ScoreMenuItem.Name = "ScoreMenuItem";
-            ScoreMenuItem.Size = new Size(54, 20);
-            ScoreMenuItem.Text = "Score: ";
             // 
             // MainForm
             // 
@@ -110,5 +119,6 @@
         private Panel FieldPanel;
         private Hero _hero;
         private ToolStripMenuItem ScoreMenuItem;
+        private ToolStripMenuItem HealthPointsMenuItem;
     }
 }

@@ -9,12 +9,26 @@ namespace WinFormsGame_31
         {
             Location = new Point(400, Random.Shared.Next(200, 300))
         };
-
-        private List<IMovable> _movementList = new List<IMovable>();
         public MainForm()
         {
             InitializeComponent();
+
+        }
+
+        public void Reset()
+        {
+            _score = 0;
+            _counter = 0;
+            FieldPanel.Controls.Clear();
+            _enemy = new Enemy()
+            {
+                Location = new Point(400, Random.Shared.Next(200, 300))
+            };
             FieldPanel.Controls.Add(_enemy);
+
+            _hero = new Hero() { Location = new Point(60, 200) };
+            FieldPanel.Controls.Add(_hero);
+            GameCycleTimer.Start();
         }
 
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
@@ -39,8 +53,7 @@ namespace WinFormsGame_31
             }
             if (e.KeyCode == Keys.Space)
             {
-                var proj = new Projectile() { Location = _hero.Center };
-                _movementList.Add(proj);
+                var proj = new Projectile() { Location = _hero.Center, Owner = Owners.Hero };
                 FieldPanel.Controls.Add(proj);
             }
 
@@ -55,21 +68,19 @@ namespace WinFormsGame_31
         private void GameCycleTimer_Tick(object sender, EventArgs e)
         {
             DrawHero();
-            foreach (var item in _movementList)
-            {
-                item.MoveObject();
-            }
 
-            
-                
+
             _counter++;
-            if (_counter > 7 )
+            if (_counter % 7 == 0)
             {
                 var speed = new Vector(0, Random.Shared.Next(-10, 10));
 
                 _enemy.Speed = speed;
-
-                _counter = 0;
+            }
+            if (_counter % 21 == 0)
+            {
+                var proj = new Projectile() { Location = _enemy.Center, Speed = new Vector(-10, 0), BackColor = Color.Red, Owner = Owners.Enemy };
+                FieldPanel.Controls.Add(proj);
             }
             _enemy.MoveObject();
 
@@ -83,29 +94,54 @@ namespace WinFormsGame_31
                 _enemy.Location = new Point(_enemy.Location.X, FieldPanel.Height - _enemy.Height);
             }
 
-            foreach (Projectile item in _movementList)
+            foreach (var item in FieldPanel.Controls.OfType<Projectile>())
             {
-                if (item.IsCollide(_enemy))
+                item.MoveObject();
+
+                if (item.Owner == Owners.Hero && item.IsCollide(_enemy))
                 {
+                    FieldPanel.Controls.Remove(_enemy);
                     _enemy.Dispose();
+
                     _enemy = new Enemy() { Location = new Point(400, Random.Shared.Next(200, 300)) };
-                    IncreaseScore();
                     FieldPanel.Controls.Add(_enemy);
+                    IncreaseScore();
+                    item.Owner = Owners.None;
+
+
+                }
+                if (item.Owner == Owners.Enemy && item.IsCollide(_hero))
+                {
+                    _hero.HealthPoint--;
+                    item.Owner = Owners.None;
+                }
+
+                if (item.Location.X > FieldPanel.Width || item.Location.X < -item.Width)
+                {
+                    item.Owner = Owners.None;
                 }
             }
 
-            var removeList = _movementList.Where(x => x.Location.X > Width).ToList();
+            var removeList = FieldPanel.Controls.OfType<Projectile>().Where(x => x.Owner == Owners.None).ToList();
 
             foreach (var item in removeList)
             {
-                _movementList.Remove(item);
-                FieldPanel.Controls.Remove(item as Control);
+                FieldPanel.Controls.Remove(item);
+                item.Dispose();
+            }
+
+            HealthPointsMenuItem.Text = $"HP = {_hero.HealthPoint}";
+
+            if (_hero.HealthPoint <= 0)
+            {
+                GameCycleTimer.Stop();
+                MessageBox.Show($"Потрачено! \n Счет: {_score}");
             }
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            GameCycleTimer.Start();
+            Reset();
         }
 
         private void MainForm_KeyUp(object sender, KeyEventArgs e)
@@ -150,6 +186,11 @@ namespace WinFormsGame_31
             }
 
             _hero.Location = newPos;
+        }
+
+        private void NewGameMenuItem_Click(object sender, EventArgs e)
+        {
+            Reset();
         }
     }
 
@@ -206,6 +247,13 @@ namespace WinFormsGame_31
 
     public class Hero : GameObject, IMovable
     {
+        public Hero()
+        {
+            BackColor = Color.Blue;
+            Size = new Size(50, 50);
+        }
+
+        public int HealthPoint { get; set; } = 3;
         public Vector Speed { get; set; }
 
         public void MoveObject()
@@ -232,10 +280,11 @@ namespace WinFormsGame_31
 
     public class Projectile : GameObject, IMovable
     {
+        public Owners Owner { get; set; }
         public Projectile()
         {
             Size = new Size(5, 5);
-            BackColor = Color.Red;
+            BackColor = Color.Blue;
         }
 
         public bool IsCollide(GameObject go)
@@ -249,5 +298,11 @@ namespace WinFormsGame_31
         {
             Location = Location + Speed;
         }
+    }
+    public enum Owners
+    {
+        None,
+        Enemy,
+        Hero
     }
 }
