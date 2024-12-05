@@ -32,8 +32,10 @@
             GameTimer = new System.Windows.Forms.Timer(components);
             menuStrip1 = new MenuStrip();
             statusStrip1 = new StatusStrip();
+            ScoreStatusLabel = new ToolStripStatusLabel();
             FieldPanel = new Panel();
             CoolHero = new Hero();
+            statusStrip1.SuspendLayout();
             FieldPanel.SuspendLayout();
             SuspendLayout();
             // 
@@ -52,11 +54,18 @@
             // 
             // statusStrip1
             // 
+            statusStrip1.Items.AddRange(new ToolStripItem[] { ScoreStatusLabel });
             statusStrip1.Location = new Point(0, 428);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Size = new Size(800, 22);
             statusStrip1.TabIndex = 1;
             statusStrip1.Text = "statusStrip1";
+            // 
+            // ScoreStatusLabel
+            // 
+            ScoreStatusLabel.Name = "ScoreStatusLabel";
+            ScoreStatusLabel.Size = new Size(33, 17);
+            ScoreStatusLabel.Text = "Счет";
             // 
             // FieldPanel
             // 
@@ -66,13 +75,14 @@
             FieldPanel.Name = "FieldPanel";
             FieldPanel.Size = new Size(800, 404);
             FieldPanel.TabIndex = 2;
+            FieldPanel.MouseClick += FieldPanel_MouseClick;
             // 
-            // hero1
+            // CoolHero
             // 
             CoolHero.BackColor = Color.Blue;
             CoolHero.Location = new Point(381, 180);
-            CoolHero.Name = "hero1";
-            CoolHero.Size = new Size(30, 50);
+            CoolHero.Name = "CoolHero";
+            CoolHero.Size = new Size(30, 30);
             CoolHero.TabIndex = 0;
             // 
             // MainForm
@@ -90,6 +100,8 @@
             Load += MainForm_Load;
             KeyDown += MainForm_KeyDown;
             KeyUp += MainForm_KeyUp;
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
             FieldPanel.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
@@ -102,5 +114,6 @@
         private StatusStrip statusStrip1;
         private Panel FieldPanel;
         private Hero CoolHero;
+        private ToolStripStatusLabel ScoreStatusLabel;
     }
 }
