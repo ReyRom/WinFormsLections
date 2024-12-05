@@ -12,12 +12,12 @@ namespace WinFormsGame_31
         public MainForm()
         {
             InitializeComponent();
-
         }
 
         public void Reset()
         {
             _score = 0;
+            ScoreMenuItem.Text = $"Счет: {_score}";
             _counter = 0;
             FieldPanel.Controls.Clear();
             _enemy = new Enemy()
@@ -29,6 +29,8 @@ namespace WinFormsGame_31
             _hero = new Hero() { Location = new Point(60, 200) };
             FieldPanel.Controls.Add(_hero);
             GameCycleTimer.Start();
+
+            HighScoreMenuItem.Text = $"Рекорд: {Properties.Settings.Default.HighScore}";
         }
 
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
@@ -62,7 +64,7 @@ namespace WinFormsGame_31
         private void IncreaseScore()
         {
             _score++;
-            ScoreMenuItem.Text = $"Score: {_score}";
+            ScoreMenuItem.Text = $"Счет: {_score}";
         }
 
         private void GameCycleTimer_Tick(object sender, EventArgs e)
@@ -136,6 +138,11 @@ namespace WinFormsGame_31
             {
                 GameCycleTimer.Stop();
                 MessageBox.Show($"Потрачено! \n Счет: {_score}");
+                if (Properties.Settings.Default.HighScore < _score)
+                {
+                    Properties.Settings.Default.HighScore = _score;
+                    Properties.Settings.Default.Save();
+                }
             }
         }
 

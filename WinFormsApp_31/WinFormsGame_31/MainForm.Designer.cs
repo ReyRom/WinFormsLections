@@ -36,13 +36,14 @@
             GameCycleTimer = new System.Windows.Forms.Timer(components);
             FieldPanel = new Panel();
             _hero = new Hero();
+            HighScoreMenuItem = new ToolStripMenuItem();
             MainMenuStrip.SuspendLayout();
             FieldPanel.SuspendLayout();
             SuspendLayout();
             // 
             // MainMenuStrip
             // 
-            MainMenuStrip.Items.AddRange(new ToolStripItem[] { NewGameMenuItem, ScoreMenuItem, HealthPointsMenuItem });
+            MainMenuStrip.Items.AddRange(new ToolStripItem[] { NewGameMenuItem, ScoreMenuItem, HighScoreMenuItem, HealthPointsMenuItem });
             MainMenuStrip.Location = new Point(0, 0);
             MainMenuStrip.Name = "MainMenuStrip";
             MainMenuStrip.Size = new Size(471, 24);
@@ -92,6 +93,12 @@
             _hero.Size = new Size(43, 54);
             _hero.TabIndex = 2;
             // 
+            // HighScoreMenuItem
+            // 
+            HighScoreMenuItem.Name = "HighScoreMenuItem";
+            HighScoreMenuItem.Size = new Size(58, 20);
+            HighScoreMenuItem.Text = "Рекорд";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -120,5 +127,6 @@
         private Hero _hero;
         private ToolStripMenuItem ScoreMenuItem;
         private ToolStripMenuItem HealthPointsMenuItem;
+        private ToolStripMenuItem HighScoreMenuItem;
     }
 }
