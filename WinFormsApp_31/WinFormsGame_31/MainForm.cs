@@ -81,7 +81,15 @@ namespace WinFormsGame_31
             }
             if (_counter % 21 == 0)
             {
-                var proj = new Projectile() { Location = _enemy.Center, Speed = new Vector(-10, 0), BackColor = Color.Red, Owner = Owners.Enemy };
+                var ps = (new Vector(_hero.Center) - new Vector(_enemy.Center)).Normalize()*10;
+
+                var proj = new Projectile() 
+                { 
+                    Location = _enemy.Center, 
+                    Speed = ps, 
+                    BackColor = Color.Red, 
+                    Owner = Owners.Enemy 
+                };
                 FieldPanel.Controls.Add(proj);
             }
             _enemy.MoveObject();
@@ -201,15 +209,14 @@ namespace WinFormsGame_31
         }
     }
 
-    public interface IMovable
-    {
-        void MoveObject();
-        Vector Speed { get; set; }
-        Point Location { get; set; }
-    }
-
     public class GameObject : Panel
     {
+        public void MoveObject()
+        {
+            Location = Location + Speed;
+        }
+
+        public Vector Speed { get; set; }
         public int LeftBound => Location.X;
         public int TopBound => Location.Y;
         public int RightBound => Location.X + Width;
@@ -228,6 +235,11 @@ namespace WinFormsGame_31
         {
             X = x;
             Y = y;
+        }
+        public Vector(Point point)
+        {
+            X = point.X;
+            Y = point.Y;
         }
 
         public float Length => (float)Math.Sqrt(X * X + Y * Y);
@@ -250,9 +262,13 @@ namespace WinFormsGame_31
         {
             return new Vector(v.X * n, v.Y * n);
         }
+        public static Vector operator -(Vector v1, Vector v2)
+        {
+            return new Vector(v1.X - v2.X, v1.Y - v2.Y);
+        }        
     }
 
-    public class Hero : GameObject, IMovable
+    public class Hero : GameObject
     {
         public Hero()
         {
@@ -261,7 +277,6 @@ namespace WinFormsGame_31
         }
 
         public int HealthPoint { get; set; } = 3;
-        public Vector Speed { get; set; }
 
         public void MoveObject()
         {
@@ -269,7 +284,7 @@ namespace WinFormsGame_31
         }
     }
 
-    public class Enemy : GameObject, IMovable
+    public class Enemy : GameObject
     {
         public Enemy()
         {
@@ -277,33 +292,21 @@ namespace WinFormsGame_31
             BackColor = Color.Red;
         }
 
-        public Vector Speed { get; set; }
-
-        public void MoveObject()
-        {
-            Location = Location + Speed;
-        }
     }
 
-    public class Projectile : GameObject, IMovable
+    public class Projectile : GameObject
     {
         public Owners Owner { get; set; }
         public Projectile()
         {
             Size = new Size(5, 5);
             BackColor = Color.Blue;
+            Speed = new Vector(25, 0);
         }
 
         public bool IsCollide(GameObject go)
         {
             return Bounds.IntersectsWith(go.Bounds);
-        }
-
-        public Vector Speed { get; set; } = new Vector(25, 0);
-
-        public void MoveObject()
-        {
-            Location = Location + Speed;
         }
     }
     public enum Owners

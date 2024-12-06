@@ -32,11 +32,12 @@
             MainMenuStrip = new MenuStrip();
             NewGameMenuItem = new ToolStripMenuItem();
             ScoreMenuItem = new ToolStripMenuItem();
+            HighScoreMenuItem = new ToolStripMenuItem();
             HealthPointsMenuItem = new ToolStripMenuItem();
             GameCycleTimer = new System.Windows.Forms.Timer(components);
             FieldPanel = new Panel();
+            enemy1 = new Enemy();
             _hero = new Hero();
-            HighScoreMenuItem = new ToolStripMenuItem();
             MainMenuStrip.SuspendLayout();
             FieldPanel.SuspendLayout();
             SuspendLayout();
@@ -46,7 +47,7 @@
             MainMenuStrip.Items.AddRange(new ToolStripItem[] { NewGameMenuItem, ScoreMenuItem, HighScoreMenuItem, HealthPointsMenuItem });
             MainMenuStrip.Location = new Point(0, 0);
             MainMenuStrip.Name = "MainMenuStrip";
-            MainMenuStrip.Size = new Size(471, 24);
+            MainMenuStrip.Size = new Size(1071, 24);
             MainMenuStrip.TabIndex = 0;
             MainMenuStrip.Text = "menuStrip1";
             // 
@@ -63,6 +64,12 @@
             ScoreMenuItem.Size = new Size(54, 20);
             ScoreMenuItem.Text = "Score: ";
             // 
+            // HighScoreMenuItem
+            // 
+            HighScoreMenuItem.Name = "HighScoreMenuItem";
+            HighScoreMenuItem.Size = new Size(58, 20);
+            HighScoreMenuItem.Text = "Рекорд";
+            // 
             // HealthPointsMenuItem
             // 
             HealthPointsMenuItem.Name = "HealthPointsMenuItem";
@@ -76,34 +83,37 @@
             // 
             // FieldPanel
             // 
+            FieldPanel.Controls.Add(enemy1);
             FieldPanel.Controls.Add(_hero);
             FieldPanel.Dock = DockStyle.Fill;
             FieldPanel.ForeColor = SystemColors.ActiveCaptionText;
             FieldPanel.Location = new Point(0, 24);
             FieldPanel.Name = "FieldPanel";
-            FieldPanel.Size = new Size(471, 479);
+            FieldPanel.Size = new Size(1071, 479);
             FieldPanel.TabIndex = 2;
+            // 
+            // enemy1
+            // 
+            enemy1.BackColor = Color.Red;
+            enemy1.Location = new Point(1034, 17);
+            enemy1.Name = "enemy1";
+            enemy1.Size = new Size(25, 25);
+            enemy1.TabIndex = 3;
             // 
             // _hero
             // 
             _hero.BackColor = Color.Blue;
             _hero.HealthPoint = 3;
-            _hero.Location = new Point(63, 209);
+            _hero.Location = new Point(523, 192);
             _hero.Name = "_hero";
             _hero.Size = new Size(43, 54);
             _hero.TabIndex = 2;
-            // 
-            // HighScoreMenuItem
-            // 
-            HighScoreMenuItem.Name = "HighScoreMenuItem";
-            HighScoreMenuItem.Size = new Size(58, 20);
-            HighScoreMenuItem.Text = "Рекорд";
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(471, 503);
+            ClientSize = new Size(1071, 503);
             Controls.Add(FieldPanel);
             Controls.Add(MainMenuStrip);
             Name = "MainForm";
@@ -124,9 +134,10 @@
         private ToolStripMenuItem NewGameMenuItem;
         private System.Windows.Forms.Timer GameCycleTimer;
         private Panel FieldPanel;
-        private Hero _hero;
         private ToolStripMenuItem ScoreMenuItem;
         private ToolStripMenuItem HealthPointsMenuItem;
         private ToolStripMenuItem HighScoreMenuItem;
+        private Enemy enemy1;
+        private Hero _hero;
     }
 }

@@ -53,7 +53,7 @@ namespace WinFormsGame_34_45
                         FieldPanel.Controls.Remove(e);
                         e.Dispose();
                         p.Dispose();
-                        Score++;
+                        Score++;dddds
                     }
                 });
 
