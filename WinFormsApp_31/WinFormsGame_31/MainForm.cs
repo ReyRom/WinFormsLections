@@ -5,10 +5,7 @@ namespace WinFormsGame_31
         private const float MOVESPEED = 5;
         private int _score = 0;
         private int _counter = 0;
-        private Enemy _enemy = new Enemy()
-        {
-            Location = new Point(400, Random.Shared.Next(200, 300))
-        };
+        private Enemy _enemy;
         public MainForm()
         {
             InitializeComponent();
@@ -20,52 +17,51 @@ namespace WinFormsGame_31
             ScoreMenuItem.Text = $"—чет: {_score}";
             _counter = 0;
             FieldPanel.Controls.Clear();
-            _enemy = new Enemy()
-            {
-                Location = new Point(400, Random.Shared.Next(200, 300))
-            };
-            FieldPanel.Controls.Add(_enemy);
 
-            _hero = new Hero() { Location = new Point(60, 200) };
+            _hero = new Hero() { Location = new Point(FieldPanel.Width / 2 - _hero.Width / 2, FieldPanel.Height / 2 - _hero.Height / 2) };
             FieldPanel.Controls.Add(_hero);
             GameCycleTimer.Start();
 
             HighScoreMenuItem.Text = $"–екорд: {Properties.Settings.Default.HighScore}";
         }
 
-        private void MainForm_KeyDown(object sender, KeyEventArgs e)
-        {
-            Vector speed = _hero.Speed;
-
-            if (e.KeyCode == Keys.Left)
-            {
-                speed.X = -MOVESPEED;
-            }
-            if (e.KeyCode == Keys.Right)
-            {
-                speed.X = MOVESPEED;
-            }
-            if (e.KeyCode == Keys.Up)
-            {
-                speed.Y = -MOVESPEED;
-            }
-            if (e.KeyCode == Keys.Down)
-            {
-                speed.Y = MOVESPEED;
-            }
-            if (e.KeyCode == Keys.Space)
-            {
-                var proj = new Projectile() { Location = _hero.Center, Owner = Owners.Hero };
-                FieldPanel.Controls.Add(proj);
-            }
-
-            _hero.Speed = speed;
-        }
         private void IncreaseScore()
         {
             _score++;
             ScoreMenuItem.Text = $"—чет: {_score}";
         }
+
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            Vector speed = _hero.Speed;
+
+            if (e.KeyCode == Keys.A)
+            {
+                speed.X = -MOVESPEED;
+            }
+            if (e.KeyCode == Keys.D)
+            {
+                speed.X = MOVESPEED;
+            }
+            if (e.KeyCode == Keys.W)
+            {
+                speed.Y = -MOVESPEED;
+            }
+            if (e.KeyCode == Keys.S)
+            {
+                speed.Y = MOVESPEED;
+            }
+            if (e.KeyCode == Keys.Space)
+            {
+                var ps = (new Vector(FieldPanel.PointToClient(MousePosition)) - new Vector(_hero.Center)).Normalize() * 10;
+
+                var proj = new Projectile() { Location = _hero.Center, Speed = ps, Owner = Owners.Hero };
+                FieldPanel.Controls.Add(proj);
+            }
+
+            _hero.Speed = speed;
+        }
+        
 
         private void GameCycleTimer_Tick(object sender, EventArgs e)
         {
@@ -75,51 +71,75 @@ namespace WinFormsGame_31
             _counter++;
             if (_counter % 7 == 0)
             {
-                var speed = new Vector(0, Random.Shared.Next(-10, 10));
+                FieldPanel.Controls.OfType<Enemy>().ToList().ForEach(enemy =>
+                {
+                    var speed = new Vector(0, Random.Shared.Next(-10, 10));
 
-                _enemy.Speed = speed;
+                    enemy.Speed = speed;
+                });
             }
-            if (_counter % 21 == 0)
+            if (_counter % 60 == 0)
             {
-                var ps = (new Vector(_hero.Center) - new Vector(_enemy.Center)).Normalize()*10;
-
-                var proj = new Projectile() 
-                { 
-                    Location = _enemy.Center, 
-                    Speed = ps, 
-                    BackColor = Color.Red, 
-                    Owner = Owners.Enemy 
-                };
-                FieldPanel.Controls.Add(proj);
+                FieldPanel.Controls.OfType<Enemy>().ToList().ForEach(enemy =>
+                {
+                    var ps = (new Vector(_hero.Center) - new Vector(enemy.Center)).Normalize() * 10;
+                    var proj = new Projectile()
+                    {
+                        Location = enemy.Center,
+                        Speed = ps,
+                        BackColor = Color.Red,
+                        Owner = Owners.Enemy
+                    };
+                    FieldPanel.Controls.Add(proj);
+                });
             }
-            _enemy.MoveObject();
 
-            if (_enemy.TopBound - _enemy.Speed.Y < 0)
+            if (_counter % 30 == 0)
             {
-                _enemy.Location = new Point(_enemy.Location.X, 0);
+                Enemy enemy = new Enemy();
+                var x1 = Random.Shared.Next(0, enemy.Width * 4);
+                var x2 = Random.Shared.Next(FieldPanel.Width - enemy.Width * 5, FieldPanel.Width - enemy.Width);
+
+                var y = Random.Shared.Next(0, FieldPanel.Height - enemy.Height);
+
+                enemy.Location = new Point((Random.Shared.Next() % 2 == 0) ? x1 : x2, y);
+                FieldPanel.Controls.Add(enemy);
             }
 
-            if (_enemy.BottomBound + _enemy.Speed.Y > FieldPanel.Height - _enemy.Height)
+            FieldPanel.Controls.OfType<Enemy>().ToList().ForEach(enemy =>
             {
-                _enemy.Location = new Point(_enemy.Location.X, FieldPanel.Height - _enemy.Height);
-            }
+                enemy.MoveObject();
+                if (enemy.TopBound - enemy.Speed.Y < 0)
+                {
+                    enemy.Location = new Point(enemy.Location.X, 0);
+                }
+
+                if (enemy.BottomBound + enemy.Speed.Y > FieldPanel.Height - enemy.Height)
+                {
+                    enemy.Location = new Point(enemy.Location.X, FieldPanel.Height - enemy.Height);
+                }
+            });
+
+
 
             foreach (var item in FieldPanel.Controls.OfType<Projectile>())
             {
                 item.MoveObject();
 
-                if (item.Owner == Owners.Hero && item.IsCollide(_enemy))
+
+                FieldPanel.Controls.OfType<Enemy>().ToList().ForEach(enemy =>
                 {
-                    FieldPanel.Controls.Remove(_enemy);
-                    _enemy.Dispose();
+                    if (item.Owner == Owners.Hero && item.IsCollide(enemy))
+                    {
+                        FieldPanel.Controls.Remove(enemy);
+                        enemy.Dispose();
 
-                    _enemy = new Enemy() { Location = new Point(400, Random.Shared.Next(200, 300)) };
-                    FieldPanel.Controls.Add(_enemy);
-                    IncreaseScore();
-                    item.Owner = Owners.None;
+                        IncreaseScore();
+                        item.Owner = Owners.None;
+                    }
+                });
 
 
-                }
                 if (item.Owner == Owners.Enemy && item.IsCollide(_hero))
                 {
                     _hero.HealthPoint--;
@@ -164,12 +184,12 @@ namespace WinFormsGame_31
             var speed = _hero.Speed;
             switch (e.KeyCode)
             {
-                case Keys.Up:
-                case Keys.Down:
+                case Keys.W:
+                case Keys.S:
                     speed.Y = 0;
                     break;
-                case Keys.Left:
-                case Keys.Right:
+                case Keys.A:
+                case Keys.D:
                     speed.X = 0;
                     break;
             }
@@ -265,7 +285,7 @@ namespace WinFormsGame_31
         public static Vector operator -(Vector v1, Vector v2)
         {
             return new Vector(v1.X - v2.X, v1.Y - v2.Y);
-        }        
+        }
     }
 
     public class Hero : GameObject
