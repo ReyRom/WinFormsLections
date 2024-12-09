@@ -13,7 +13,17 @@ namespace WinFormsGame_34_45
             set
             {
                 _score = value;
-                ScoreStatusLabel.Text = $"Счет {_score}";
+                ScoreStatusLabel.Text = $"Счет: {_score}";
+            }
+        }
+
+        public int HP
+        {
+            get => CoolHero.HealthPoints;
+            set
+            {
+                CoolHero.HealthPoints = value;
+                HealthPointsStatusLabel.Text = $"HP: {HP}";
             }
         }
 
@@ -21,10 +31,31 @@ namespace WinFormsGame_34_45
         {
             InitializeComponent();
         }
-       
+
+        private void Restart()
+        {
+            Score = 0;
+            HP = 3;
+            Enemy.Movespeed = 1;
+            HighScoreStatusLabel.Text = $"Рекорд: {Properties.Settings.Default.HighScore}";
+            CoolHero.Location = new Point(FieldPanel.Width / 2 - CoolHero.Width / 2, FieldPanel.Height / 2 - CoolHero.Height / 2);
+            CoolHero.Speed = Vector.Zero;
+            FieldPanel.Controls.OfType<Enemy>().ToList().ForEach(enemy =>
+            {
+                FieldPanel.Controls.Remove(enemy);
+                enemy.Dispose();
+            });
+            FieldPanel.Controls.OfType<Projectile>().ToList().ForEach(proj =>
+            {
+                FieldPanel.Controls.Remove(proj);
+                proj.Dispose();
+            });
+            GameTimer.Start();
+        }
+
         private void MainForm_Load(object sender, EventArgs e)
         {
-            GameTimer.Start();
+            Restart();
         }
 
         private void GameTimer_Tick(object sender, EventArgs e)
@@ -34,6 +65,13 @@ namespace WinFormsGame_34_45
                 SpawnEnemy();
             }
 
+            if (_counter % 10 == 0)
+            {
+                Enemy.Movespeed += 0.05f;
+            }
+
+            
+
             CoolHero.MoveWithSpeed();
             FieldPanel.Controls.OfType<Projectile>().ToList().ForEach(p =>
             {
@@ -42,27 +80,46 @@ namespace WinFormsGame_34_45
 
             FieldPanel.Controls.OfType<Enemy>().ToList().ForEach(e =>
             {
-                Vector vector = new Vector(CoolHero.Location.X - e.Location.X, CoolHero.Location.Y - e.Location.Y).Normalize() * 3;
+                Vector vector = new Vector(CoolHero.Location.X - e.Location.X, CoolHero.Location.Y - e.Location.Y).Normalize() * Enemy.Movespeed;
                 e.Speed = vector;
 
                 FieldPanel.Controls.OfType<Projectile>().ToList().ForEach(p =>
                 {
-                    if(p.IsCollide(e))
+                    if (p.IsCollide(e))
                     {
                         FieldPanel.Controls.Remove(p);
                         FieldPanel.Controls.Remove(e);
                         e.Dispose();
                         p.Dispose();
-                        Score++;dddds
+                        Score++;
                     }
                 });
+
+                if (e.IsCollide(CoolHero))
+                {
+                    HP--;
+                    FieldPanel.Controls.Remove(e);
+                    e.Dispose();
+                }
 
                 e.MoveWithSpeed();
             });
 
             ValidateHeroOnField();
 
+            if (HP <= 0)
+            {
+                GameTimer.Stop();
 
+                if(Score > Properties.Settings.Default.HighScore)
+                {
+                    Properties.Settings.Default.HighScore = Score;
+                    Properties.Settings.Default.Save();
+                }
+
+
+                MessageBox.Show("Потрачено!");
+            }
 
 
             if (_counter < int.MaxValue)
@@ -74,6 +131,8 @@ namespace WinFormsGame_34_45
                 _counter = 0;
             }
         }
+
+
 
         private void ValidateHeroOnField()
         {
@@ -120,7 +179,13 @@ namespace WinFormsGame_34_45
 
             if (e.KeyCode == Keys.Space)
             {
-                
+                var proj = new Projectile();
+                proj.Location = CoolHero.Center;
+                var point = FieldPanel.PointToClient(MousePosition);
+                Vector vector = new Vector(point.X - CoolHero.Center.X, point.Y - CoolHero.Center.Y).Normalize() * 20;
+                proj.Speed = vector;
+
+                FieldPanel.Controls.Add(proj);
             }
         }
 
@@ -166,15 +231,9 @@ namespace WinFormsGame_34_45
             FieldPanel.Controls.Add(enemy);
         }
 
-        private void FieldPanel_MouseClick(object sender, MouseEventArgs e)
+        private void NewGameMenuItem_Click(object sender, EventArgs e)
         {
-            var proj = new Projectile();
-            proj.Location = CoolHero.Center;
-
-            Vector vector = new Vector(e.X - CoolHero.Center.X, e.Y - CoolHero.Center.Y).Normalize() * 20;
-            proj.Speed = vector;
-
-            FieldPanel.Controls.Add(proj);
+            Restart();
         }
     }
 
@@ -183,16 +242,27 @@ namespace WinFormsGame_34_45
     public class Hero : GameObject
     {
         public const float MOVESPEED = 5;
+
+        public float Angle { get; set; } = 50;
+
+        public int HealthPoints { get; set; } = 3;
+
         public Hero()
         {
             Size = new Size(30, 30);
             BackColor = Color.Blue;
             Speed = Vector.Zero;
         }
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            e.Graphics.RotateTransform(Angle);
+            base.OnPaint(e);
+        }
     }
 
     public class Enemy : GameObject
     {
+        public static float Movespeed = 1;
         public Enemy()
         {
             Size = new Size(25, 25);
