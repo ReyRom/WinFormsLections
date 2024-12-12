@@ -6,9 +6,13 @@ namespace WinFormsGame_31
         private int _score = 0;
         private int _counter = 0;
         private Enemy _enemy;
+        private Image _enemyImage;
+        private Image _heroImage;
         public MainForm()
         {
             InitializeComponent();
+            _enemyImage = Image.FromFile("enemy.png");
+            _heroImage = Image.FromFile("hero.png");
         }
 
         public void Reset()
@@ -19,6 +23,7 @@ namespace WinFormsGame_31
             FieldPanel.Controls.Clear();
 
             _hero = new Hero() { Location = new Point(FieldPanel.Width / 2 - _hero.Width / 2, FieldPanel.Height / 2 - _hero.Height / 2) };
+            _hero.Paint += Hero_Paint;
             FieldPanel.Controls.Add(_hero);
             GameCycleTimer.Start();
 
@@ -61,7 +66,7 @@ namespace WinFormsGame_31
 
             _hero.Speed = speed;
         }
-        
+
 
         private void GameCycleTimer_Tick(object sender, EventArgs e)
         {
@@ -97,6 +102,8 @@ namespace WinFormsGame_31
             if (_counter % 30 == 0)
             {
                 Enemy enemy = new Enemy();
+                enemy.BackgroundImage = _enemyImage;
+                enemy.BackgroundImageLayout = ImageLayout.Zoom;
                 var x1 = Random.Shared.Next(0, enemy.Width * 4);
                 var x2 = Random.Shared.Next(FieldPanel.Width - enemy.Width * 5, FieldPanel.Width - enemy.Width);
 
@@ -227,6 +234,18 @@ namespace WinFormsGame_31
         {
             Reset();
         }
+
+        private void Hero_Paint(object sender, PaintEventArgs e)
+        {
+            var point = FieldPanel.PointToClient(MousePosition);
+
+            //var rotationAngle = (float)(Math.Atan2);
+
+            using (Image img = _heroImage)
+            {
+                e.Graphics.DrawImage(img, -_hero.Width/2, -_hero.Height/2, _hero.Width, _hero.Height);
+            }
+        }
     }
 
     public class GameObject : Panel
@@ -308,8 +327,8 @@ namespace WinFormsGame_31
     {
         public Enemy()
         {
-            Size = new Size(25, 25);
-            BackColor = Color.Red;
+            Size = new Size(40, 40);
+            BackColor = Color.Transparent;
         }
 
     }

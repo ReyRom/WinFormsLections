@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             MainMenuStrip = new MenuStrip();
             NewGameMenuItem = new ToolStripMenuItem();
             ScoreMenuItem = new ToolStripMenuItem();
@@ -83,6 +84,7 @@
             // 
             // FieldPanel
             // 
+            FieldPanel.BackColor = Color.Navy;
             FieldPanel.Controls.Add(enemy1);
             FieldPanel.Controls.Add(_hero);
             FieldPanel.Dock = DockStyle.Fill;
@@ -94,20 +96,23 @@
             // 
             // enemy1
             // 
-            enemy1.BackColor = Color.Red;
-            enemy1.Location = new Point(1034, 17);
+            enemy1.BackColor = Color.Transparent;
+            enemy1.BackgroundImage = (Image)resources.GetObject("enemy1.BackgroundImage");
+            enemy1.BackgroundImageLayout = ImageLayout.Zoom;
+            enemy1.Location = new Point(1016, 17);
             enemy1.Name = "enemy1";
-            enemy1.Size = new Size(25, 25);
+            enemy1.Size = new Size(40, 40);
             enemy1.TabIndex = 3;
             // 
             // _hero
             // 
-            _hero.BackColor = Color.Blue;
+            _hero.BackColor = Color.Transparent;
             _hero.HealthPoint = 3;
             _hero.Location = new Point(523, 192);
             _hero.Name = "_hero";
-            _hero.Size = new Size(43, 54);
+            _hero.Size = new Size(50, 50);
             _hero.TabIndex = 2;
+            _hero.Paint += Hero_Paint;
             // 
             // MainForm
             // 
