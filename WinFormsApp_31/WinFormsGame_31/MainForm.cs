@@ -228,6 +228,7 @@ namespace WinFormsGame_31
             }
 
             _hero.Location = newPos;
+            _hero.Invalidate();
         }
 
         private void NewGameMenuItem_Click(object sender, EventArgs e)
@@ -239,12 +240,14 @@ namespace WinFormsGame_31
         {
             var point = FieldPanel.PointToClient(MousePosition);
 
-            //var rotationAngle = (float)(Math.Atan2);
+            var rotationAngle = (float)(Math.Atan2(point.Y - _hero.Center.Y, point.X-_hero.Center.X)*(180/Math.PI)+90);
 
-            using (Image img = _heroImage)
-            {
-                e.Graphics.DrawImage(img, -_hero.Width/2, -_hero.Height/2, _hero.Width, _hero.Height);
-            }
+            e.Graphics.TranslateTransform(_hero.Width/2, _hero.Height/2);
+
+            e.Graphics.RotateTransform(rotationAngle);
+
+            e.Graphics.DrawImage(_heroImage, -_hero.Width / 2, -_hero.Height / 2, _hero.Width, _hero.Height);
+            e.Graphics.ResetTransform();
         }
     }
 
@@ -311,8 +314,9 @@ namespace WinFormsGame_31
     {
         public Hero()
         {
-            BackColor = Color.Blue;
+            BackColor = Color.Transparent;
             Size = new Size(50, 50);
+            DoubleBuffered = true;
         }
 
         public int HealthPoint { get; set; } = 3;
