@@ -116,12 +116,12 @@ namespace WinFormsGame_31
             FieldPanel.Controls.OfType<Enemy>().ToList().ForEach(enemy =>
             {
                 enemy.MoveObject();
-                if (enemy.TopBound - enemy.Speed.Y < 0)
+                if (enemy.TopBound + enemy.Speed.Y < 0)
                 {
                     enemy.Location = new Point(enemy.Location.X, 0);
                 }
 
-                if (enemy.BottomBound + enemy.Speed.Y > FieldPanel.Height - enemy.Height)
+                if (enemy.BottomBound + enemy.Speed.Y > FieldPanel.Height)
                 {
                     enemy.Location = new Point(enemy.Location.X, FieldPanel.Height - enemy.Height);
                 }

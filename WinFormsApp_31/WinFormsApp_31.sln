@@ -5,7 +5,9 @@ VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinFormsApp_31", "WinFormsApp_31\WinFormsApp_31.csproj", "{B02AF404-F6A2-446F-8B74-A72BDEEE5E0E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsGame_31", "WinFormsGame_31\WinFormsGame_31.csproj", "{F1049877-FB3D-48EC-A081-3926DD3ABF18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinFormsGame_31", "WinFormsGame_31\WinFormsGame_31.csproj", "{F1049877-FB3D-48EC-A081-3926DD3ABF18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsBinding_31", "WinFormsBinding_31\WinFormsBinding_31.csproj", "{E26E478A-38E7-488A-A097-C6CEE2270D19}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{F1049877-FB3D-48EC-A081-3926DD3ABF18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1049877-FB3D-48EC-A081-3926DD3ABF18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1049877-FB3D-48EC-A081-3926DD3ABF18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E26E478A-38E7-488A-A097-C6CEE2270D19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E26E478A-38E7-488A-A097-C6CEE2270D19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E26E478A-38E7-488A-A097-C6CEE2270D19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E26E478A-38E7-488A-A097-C6CEE2270D19}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

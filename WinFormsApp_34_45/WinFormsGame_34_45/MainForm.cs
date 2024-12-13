@@ -4,6 +4,8 @@ namespace WinFormsGame_34_45
 {
     public partial class MainForm : Form
     {
+        private Image _heroImage;
+        private Image _enemyImage;
         private int _counter = 0;
         private int _score = 0;
 
@@ -30,6 +32,8 @@ namespace WinFormsGame_34_45
         public MainForm()
         {
             InitializeComponent();
+            _heroImage = Image.FromFile("hero.png");
+            _enemyImage = Image.FromFile("enemy.png");
         }
 
         private void Restart()
@@ -70,8 +74,8 @@ namespace WinFormsGame_34_45
                 Enemy.Movespeed += 0.05f;
             }
 
-            
 
+            CoolHero.Invalidate();
             CoolHero.MoveWithSpeed();
             FieldPanel.Controls.OfType<Projectile>().ToList().ForEach(p =>
             {
@@ -111,7 +115,7 @@ namespace WinFormsGame_34_45
             {
                 GameTimer.Stop();
 
-                if(Score > Properties.Settings.Default.HighScore)
+                if (Score > Properties.Settings.Default.HighScore)
                 {
                     Properties.Settings.Default.HighScore = Score;
                     Properties.Settings.Default.Save();
@@ -227,6 +231,8 @@ namespace WinFormsGame_34_45
             }
 
             enemy.Location = new Point(x, y);
+            enemy.BackgroundImage = _enemyImage;
+            enemy.BackgroundImageLayout = ImageLayout.Zoom;
 
             FieldPanel.Controls.Add(enemy);
         }
@@ -234,6 +240,22 @@ namespace WinFormsGame_34_45
         private void NewGameMenuItem_Click(object sender, EventArgs e)
         {
             Restart();
+        }
+
+        private void CoolHero_Paint(object sender, PaintEventArgs e)
+        {
+            var point = FieldPanel.PointToClient(MousePosition);
+
+            var rotationAngle = (float)(Math.Atan2(point.Y - CoolHero.Center.Y, point.X - CoolHero.Center.X)*(180/Math.PI)+90);
+
+            e.Graphics.TranslateTransform(CoolHero.Width/2,CoolHero.Height/2);
+
+            e.Graphics.RotateTransform(rotationAngle);
+
+
+            e.Graphics.DrawImage(_heroImage,-CoolHero.Width/2,-CoolHero.Height/2,CoolHero.Width,CoolHero.Height);
+
+            e.Graphics.ResetTransform();
         }
     }
 
@@ -243,20 +265,14 @@ namespace WinFormsGame_34_45
     {
         public const float MOVESPEED = 5;
 
-        public float Angle { get; set; } = 50;
-
         public int HealthPoints { get; set; } = 3;
 
         public Hero()
         {
             Size = new Size(30, 30);
-            BackColor = Color.Blue;
+            BackColor = Color.Transparent;
             Speed = Vector.Zero;
-        }
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            e.Graphics.RotateTransform(Angle);
-            base.OnPaint(e);
+            DoubleBuffered = true;
         }
     }
 
@@ -266,7 +282,7 @@ namespace WinFormsGame_34_45
         public Enemy()
         {
             Size = new Size(25, 25);
-            BackColor = Color.Red;
+            BackColor = Color.Transparent;
             Speed = Vector.Zero;
         }
     }

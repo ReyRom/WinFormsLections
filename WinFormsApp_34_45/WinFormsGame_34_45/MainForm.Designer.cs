@@ -103,13 +103,13 @@
             // CoolHero
             // 
             CoolHero.BackColor = Color.Transparent;
-            CoolHero.BackgroundImage = Properties.Resources.hero;
             CoolHero.BackgroundImageLayout = ImageLayout.Zoom;
             CoolHero.HealthPoints = 3;
             CoolHero.Location = new Point(381, 180);
             CoolHero.Name = "CoolHero";
             CoolHero.Size = new Size(30, 30);
             CoolHero.TabIndex = 0;
+            CoolHero.Paint += CoolHero_Paint;
             // 
             // MainForm
             // 
